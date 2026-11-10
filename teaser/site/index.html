@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0B0C0B">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Préparation en cours">
+<meta property="og:description" content="Quelque chose se prépare à Erbisœul.">
+<meta property="og:url" content="https://avantlaube.netlify.app/">
+<meta property="og:image" content="https://avantlaube.netlify.app/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>*,*::before,*::after{box-sizing:border-box}body{margin:0}img{max-width:100%}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+<title>Préparation en cours</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Quelque chose se prépare à Erbisœul. Préparation physique individuelle et en groupe restreint, au Centre de l'Hêtre.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Concept : « Avant l'aube », version atelier. Graphite, écorce de hêtre, bronze.
+   Typo condensée et athlétique, peu de mots, des blocs francs. Un soleil bronze se lève au défilement. */
+:root {
+  --bg: #0B0C0B;          /* graphite profond */
+  --surface: #141614;     /* bloc */
+  --surface-2: #1B1E1B;   /* bloc en survol */
+  --line: rgba(236, 234, 229, 0.10);
+  --text: #ECEAE5;        /* blanc cassé */
+  --bark: #8E938B;        /* gris écorce de hêtre */
+  --bronze: #C08A48;      /* accent unique */
+  --bronze-hi: #E3B272;
+  --display: "Archivo", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --body: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --sun: 0; /* 0 → 1 au défilement */
+  color-scheme: dark;
+}
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: var(--body); font-size: 1rem; line-height: 1.5; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+a { color: inherit; }
+.wrap {
+  max-width: 76rem; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.mono { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--bark); }
+.display { font-family: var(--display); font-stretch: 62%; font-weight: 850; text-transform: uppercase; line-height: 0.86; letter-spacing: -0.01em; }
+.accent { color: var(--bronze); }
+.oe { font-family: var(--body); font-stretch: 110%; font-weight: 500; }
+
+/* ---------- Barre haute ---------- */
+.top { position: relative; z-index: 3; padding-block: 1.2rem; }
+.top .wrap { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+.brand { font-family: var(--display); font-stretch: 125%; font-weight: 800; font-size: 0.95rem; letter-spacing: 0.32em; text-transform: uppercase; text-decoration: none; }
+.live { display: inline-flex; align-items: center; gap: 0.6rem; font-variant-numeric: tabular-nums; }
+.live::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--bronze); box-shadow: 0 0 0 0 rgba(192, 138, 72, .6); animation: pulse 2s infinite; }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(192, 138, 72, .55); } 70% { box-shadow: 0 0 0 10px rgba(192, 138, 72, 0); } 100% { box-shadow: 0 0 0 0 rgba(192, 138, 72, 0); } }
+
+/* ---------- Héros ---------- */
+.hero { position: relative; padding-block: 2.5rem 0; overflow: hidden; }
+.hero h1 { margin: 0; font-size: clamp(3.2rem, 15vw, 13rem); }
+.hero h1 .row2 { display: flex; align-items: flex-end; gap: 0.12em; color: var(--bronze); }
+.caret { display: inline-block; width: 0.09em; height: 0.72em; background: var(--bronze); margin-bottom: 0.08em; animation: blink 1.1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.hero__line { display: flex; justify-content: space-between; align-items: end; gap: 1.5rem; flex-wrap: wrap; margin-top: 1.8rem; }
+.hero__line p { margin: 0; font-size: clamp(1.05rem, 2vw, 1.3rem); max-width: 26rem; color: var(--text); }
+
+/* Horizon : le soleil se lève au défilement */
+.horizon { position: relative; height: clamp(9rem, 22vw, 15rem); margin-top: 2.2rem; }
+.horizon__sun {
+  position: absolute; left: 50%; bottom: 0; width: clamp(9rem, 26vw, 19rem); aspect-ratio: 1; border-radius: 50%;
+  translate: -50% calc(55% - var(--sun) * 50%);
+  background: radial-gradient(circle at 50% 50%, var(--bronze-hi) 0%, var(--bronze) 45%, rgba(192, 138, 72, 0) 72%);
+  filter: blur(1px); opacity: calc(0.55 + var(--sun) * 0.45);
+}
+.horizon__glow { position: absolute; left: 0; right: 0; bottom: 0; height: 100%; background: radial-gradient(60% 100% at 50% 100%, rgba(192, 138, 72, calc(0.10 + var(--sun) * 0.18)), transparent 70%); }
+.horizon__ground { position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--bronze) 20%, var(--bronze-hi) 50%, var(--bronze) 80%, transparent); }
+.horizon__mask { position: absolute; left: 0; right: 0; top: 100%; height: 100vh; background: var(--bg); }
+.horizon__label { position: absolute; bottom: 0.9rem; font-variant-numeric: tabular-nums; }
+.horizon__label.l { left: max(16px, env(safe-area-inset-left, 0px)); }
+.horizon__label.r { right: max(16px, env(safe-area-inset-right, 0px)); }
+
+/* ---------- Compte à rebours ---------- */
+.count { border-block: 1px solid var(--line); }
+.count .wrap { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.cell { padding-block: 1.6rem 1.4rem; padding-inline: 0.2rem; display: grid; gap: 0.4rem; border-left: 1px solid var(--line); padding-left: 1.1rem; min-width: 0; }
+.cell:first-child { border-left: 0; padding-left: 0; }
+.cell b { font-family: var(--display); font-stretch: 62%; font-weight: 800; font-size: clamp(2.8rem, 9vw, 6.5rem); line-height: 0.9; font-variant-numeric: tabular-nums; }
+.cell:first-child b { color: var(--bronze); }
+.count__caption { padding-block: 0.9rem; border-top: 1px solid var(--line); }
+
+/* ---------- Bandeau ---------- */
+.ticker { overflow: hidden; background: var(--bronze); color: var(--bg); padding-block: 0.85rem; }
+.ticker__track { display: flex; width: max-content; animation: run 38s linear infinite; }
+.ticker span { font-family: var(--display); font-stretch: 100%; font-weight: 800; font-size: 0.95rem; letter-spacing: 0.22em; text-transform: uppercase; white-space: nowrap; padding-right: 2.2rem; }
+.ticker span::after { content: "✦"; margin-left: 2.2rem; font-size: 0.7rem; vertical-align: 0.15em; }
+@keyframes run { to { transform: translateX(-50%); } }
+
+/* ---------- Blocs ---------- */
+section { padding-block: clamp(4rem, 10vw, 7rem); }
+.head { display: flex; justify-content: space-between; align-items: end; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.6rem; }
+.head h2 { margin: 0; font-size: clamp(2.6rem, 8vw, 5.5rem); }
+.bento { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; }
+.tile {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: clamp(1.2rem, 2.5vw, 2rem);
+  display: flex; flex-direction: column; justify-content: space-between; gap: 1.6rem; min-width: 0; position: relative; overflow: hidden;
+  transition: background .3s ease, border-color .3s ease;
+}
+.tile:hover { background: var(--surface-2); border-color: rgba(192, 138, 72, 0.35); }
+.tile .big { font-family: var(--display); font-stretch: 62%; font-weight: 850; line-height: 0.82; text-transform: uppercase; font-size: clamp(5rem, 13vw, 10rem); color: var(--text); }
+.tile h3 { margin: 0; font-family: var(--display); font-stretch: 75%; font-weight: 800; text-transform: uppercase; font-size: clamp(1.6rem, 3vw, 2.3rem); line-height: 0.95; }
+.tile p { margin: 0; color: var(--bark); max-width: 22rem; }
+.tile .row { display: flex; justify-content: space-between; align-items: start; gap: 1rem; }
+.t-a { grid-column: span 3; grid-row: span 2; min-height: 26rem; }
+.t-b, .t-c { grid-column: span 3; min-height: 12.5rem; }
+.t-b .big, .t-c .big { font-size: clamp(3.4rem, 7vw, 5.2rem); }
+.t-a .big { color: var(--bronze); }
+
+/* Lieu */
+.t-place { grid-column: span 4; min-height: 19rem; background: linear-gradient(160deg, #181a17 0%, #10120f 100%); }
+.t-place .name { font-family: var(--display); font-stretch: 62%; font-weight: 850; text-transform: uppercase; line-height: 0.85; font-size: clamp(3.4rem, 9vw, 7.4rem); margin: 0; }
+.t-year { grid-column: span 2; min-height: 19rem; background: var(--bronze); color: var(--bg); border-color: transparent; }
+.t-year:hover { background: var(--bronze-hi); }
+.t-year .big { color: var(--bg); font-size: clamp(4.5rem, 10vw, 8rem); }
+.t-year .mono { color: rgba(11, 12, 11, 0.7); }
+.rings { position: absolute; right: -14%; bottom: -30%; width: 75%; aspect-ratio: 1; opacity: 0.22; pointer-events: none; }
+
+/* Boutons */
+.btn {
+  display: inline-flex; align-items: center; gap: 0.7rem; text-decoration: none; align-self: flex-start;
+  font-family: var(--display); font-stretch: 110%; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.18em; text-transform: uppercase;
+  padding: 0.95rem 1.3rem; border-radius: 2px; border: 1px solid rgba(236, 234, 229, 0.28); transition: background .25s, color .25s, border-color .25s;
+}
+.btn:hover { background: var(--text); color: var(--bg); border-color: var(--text); }
+.btn svg { width: 1.1em; height: 1.1em; }
+a:focus-visible, .btn:focus-visible { outline: 2px solid var(--bronze); outline-offset: 3px; }
+
+/* Lien coulisses géant */
+.next { display: block; text-decoration: none; border-block: 1px solid var(--line); padding-block: clamp(2rem, 6vw, 3.5rem); transition: background .3s; }
+.next:hover { background: var(--surface); }
+.next .wrap { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+.next .display { font-size: clamp(2.8rem, 10vw, 8rem); }
+.next svg { width: clamp(2.5rem, 7vw, 5.5rem); height: auto; color: var(--bronze); transition: transform .3s; flex: none; }
+.next:hover svg { transform: translateX(10px); }
+
+footer { padding-block: 2rem 2.6rem; }
+footer .wrap { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+
+/* ---------- Coulisses ---------- */
+.bs-hero { padding-block: 2.5rem 1rem; }
+.bs-hero h1 { margin: 1.4rem 0 0; font-size: clamp(4rem, 17vw, 14rem); }
+.bento-3 .tile { grid-column: span 2; min-height: 15rem; }
+.tile .idx { font-family: var(--mono); font-size: 0.72rem; color: var(--bronze); letter-spacing: 0.16em; }
+.t-addr { grid-column: span 3 !important; min-height: 17rem; }
+.t-addr address { font-style: normal; font-family: var(--display); font-stretch: 75%; font-weight: 800; text-transform: uppercase; font-size: clamp(1.8rem, 3.6vw, 2.8rem); line-height: 1; }
+.t-addr address span { color: var(--bark); }
+.t-quote { grid-column: span 3 !important; min-height: 17rem; background: var(--text); color: var(--bg); border-color: transparent; }
+.t-quote:hover { background: #fff; }
+.t-quote blockquote { margin: 0; font-family: var(--display); font-stretch: 75%; font-weight: 700; font-size: clamp(1.35rem, 2.4vw, 1.9rem); line-height: 1.12; text-transform: uppercase; }
+.t-quote .mono { color: rgba(11, 12, 11, 0.65); }
+.t-quote .q { font-family: var(--display); font-weight: 900; font-size: 4rem; line-height: 0.6; color: var(--bronze); }
+
+/* Parcours : frise */
+.path { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; counter-reset: none; }
+.path > li { position: relative; display: grid; gap: 1.2rem; align-content: start; padding: 1.5rem 1.3rem 1.7rem; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; min-width: 0; }
+.path > li::after { content: ""; position: absolute; top: 2.55rem; right: -11px; width: 12px; height: 1px; background: var(--bronze); }
+.path > li:last-child::after { display: none; }
+.path__step { font-family: var(--display); font-stretch: 62%; font-weight: 850; font-size: 3.4rem; line-height: 0.8; color: var(--bark); }
+.path__body { display: grid; gap: 0.55rem; }
+.path h3 { margin: 0; font-family: var(--display); font-stretch: 75%; font-weight: 800; text-transform: uppercase; font-size: clamp(1.35rem, 2.2vw, 1.75rem); line-height: 0.98; }
+.path p { margin: 0; color: var(--bark); }
+.path .is-now { border-color: rgba(192, 138, 72, 0.55); }
+.path .is-now .path__step { color: var(--bronze); }
+.path .is-next { background: var(--bronze); border-color: transparent; color: var(--bg); }
+.path .is-next .path__step, .path .is-next .mono { color: rgba(11, 12, 11, 0.7); }
+.chips { list-style: none; margin: 0.4rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.chips li { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.35rem 0.6rem; border: 1px solid var(--line); border-radius: 999px; color: var(--text); }
+.bento-3 .t-half { grid-column: span 3; min-height: 12rem; }
+
+/* Tablette */
+@media (max-width: 1024px) {
+  .path { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .path > li:nth-child(2)::after { display: none; }
+}
+@media (max-width: 860px) {
+  .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .t-a, .t-place, .t-addr, .t-quote { grid-column: span 2 !important; grid-row: auto; min-height: 18rem; }
+  .t-b, .t-c, .t-year { grid-column: span 1; }
+  .bento-3 .t-half { grid-column: span 1; min-height: 0; }
+  .t-b, .t-c { min-height: 14rem; }
+}
+/* Téléphone */
+@media (max-width: 560px) {
+  .count .wrap { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cell:nth-child(3) { border-left: 0; padding-left: 0; }
+  .cell:nth-child(n+3) { border-top: 1px solid var(--line); }
+  .t-b, .t-c, .t-year, .bento-3 .t-half { grid-column: span 2; min-height: 11rem; }
+  .t-a { min-height: 20rem; }
+  .path { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .path > li { grid-template-columns: 3.2rem minmax(0, 1fr); gap: 0.9rem; border-radius: 0; border-width: 0 0 0 1px; border-color: var(--line); background: transparent; padding: 0 0 2rem 1.2rem; margin-left: 0.4rem; }
+  .path > li::after { top: 0.4rem; left: -4px; right: auto; width: 7px; height: 7px; border-radius: 50%; display: block !important; }
+  .path .is-now { border-color: var(--bronze); }
+  .path .is-next { background: transparent; color: var(--text); border-color: transparent; padding-bottom: 0; }
+  .path .is-next .path__step { color: var(--bronze); }
+  .path .is-next .mono { color: var(--bronze); }
+  .path__step { font-size: 2.6rem; }
+  section { padding-block: 3.5rem; }
+  .hero__line { margin-top: 1.2rem; }
+}
+/* Écrans tactiles : pas d'effet de survol collant, cibles confortables */
+@media (hover: none) {
+  .tile:hover { background: var(--surface); border-color: var(--line); }
+  .t-year:hover { background: var(--bronze); }
+  .t-quote:hover { background: var(--text); }
+  .next:hover svg { transform: none; }
+}
+a, .btn { -webkit-tap-highlight-color: transparent; }
+.btn { min-height: 44px; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+}
+</style>
+
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#accueil" data-field="name">Arthur</a>
+    <span class="mono live" id="clock">Avant l'aube</span>
+  </div>
+</header>
+
+<!-- ===================== Accueil ===================== -->
+<main id="view-home">
+  <section class="hero" style="padding-bottom:0">
+    <div class="wrap">
+      <span class="mono">Avant l'aube · <span class="oe">Erbisœul</span></span>
+      <h1 class="display"><span>Préparation</span><span class="row2">En cours<i class="caret" aria-hidden="true"></i></span></h1>
+      <div class="hero__line">
+        <p>Un projet de préparation physique prend forme. En silence.</p>
+        <a class="mono" href="#projet" style="text-decoration:none">↓ Faire défiler</a>
+      </div>
+    </div>
+    <div class="horizon" aria-hidden="true">
+      <div class="horizon__glow"></div>
+      <div class="horizon__sun"></div>
+      <div class="horizon__mask"></div>
+      <div class="horizon__ground"></div>
+      <span class="mono horizon__label l">05:00</span>
+      <span class="mono horizon__label r">Lever du jour</span>
+    </div>
+  </section>
+
+  <div class="count" aria-label="Compte à rebours avant l'ouverture visée">
+    <div class="wrap">
+      <div class="cell"><b id="cd-d">—</b><span class="mono">Jours</span></div>
+      <div class="cell"><b id="cd-h">—</b><span class="mono">Heures</span></div>
+      <div class="cell"><b id="cd-m">—</b><span class="mono">Minutes</span></div>
+      <div class="cell"><b id="cd-s">—</b><span class="mono">Secondes</span></div>
+    </div>
+    <div class="wrap count__caption"><span class="mono">Avant l'ouverture visée · <span class="accent" id="cd-label">2027</span></span></div>
+  </div>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker__track" id="ticker"></div>
+  </div>
+
+  <section id="projet">
+    <div class="wrap">
+      <div class="head">
+        <h2 class="display">Le projet</h2>
+        <span class="mono">03 formats · 1 méthode</span>
+      </div>
+      <div class="bento">
+        <article class="tile t-a">
+          <div class="row"><span class="mono">Individuel</span><span class="mono accent">01</span></div>
+          <div class="big">1:1</div>
+          <div><h3>Préparation physique sur mesure</h3><p style="margin-top:.6rem">Un plan pour une personne. Le vôtre.</p></div>
+        </article>
+        <article class="tile t-b">
+          <div class="row"><span class="mono">Groupe restreint</span><span class="mono accent">02</span></div>
+          <div class="row" style="align-items:end"><div class="big">Petit<br>comité</div><p>Peu de places.<br>Un vrai suivi.</p></div>
+        </article>
+        <article class="tile t-c">
+          <div class="row"><span class="mono">Approche globale</span><span class="mono accent">03</span></div>
+          <div class="row" style="align-items:end"><div class="big">360°</div><p>Corps, nutrition, santé. Avec des pros de la santé.</p></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="head">
+        <h2 class="display">Le lieu</h2>
+        <span class="mono">Hainaut · Belgique</span>
+      </div>
+      <div class="bento">
+        <article class="tile t-place">
+          <span class="mono">Adresse du projet</span>
+          <div>
+            <p class="name"><span data-field="venue">Centre de l'Hêtre</span></p>
+            <p style="margin-top:.8rem;font-size:1.05rem;color:var(--text)"><span data-field="village">Erbisœul</span> · 7050 Jurbise</p>
+          </div>
+          <a class="btn" id="maps-link" href="#" target="_blank" rel="noopener">Itinéraire
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+          <svg class="rings" viewBox="0 0 200 200" aria-hidden="true" fill="none" stroke="#C08A48" stroke-width="1.2">
+            <circle cx="100" cy="100" r="18"/><circle cx="102" cy="98" r="32"/><circle cx="98" cy="101" r="47"/><circle cx="101" cy="99" r="62"/><circle cx="99" cy="102" r="78"/><circle cx="100" cy="100" r="95"/>
+          </svg>
+        </article>
+        <article class="tile t-year">
+          <span class="mono">Ouverture visée</span>
+          <div class="big" data-field="openingYear">2027</div>
+          <span class="mono">Places limitées</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <a class="next" href="#coulisses">
+    <div class="wrap">
+      <div><span class="mono">Pour aller plus loin</span><div class="display" style="margin-top:.6rem">Les coulisses</div></div>
+      <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M6 24h34M28 12l12 12-12 12"/></svg>
+    </div>
+  </a>
+</main>
+
+<!-- ===================== Coulisses ===================== -->
+<main id="view-backstage" hidden>
+  <section class="bs-hero">
+    <div class="wrap">
+      <a class="mono" href="#accueil" style="text-decoration:none">← Retour</a>
+      <h1 class="display">Les<br><span class="accent">coulisses</span></h1>
+    </div>
+  </section>
+
+  <section style="padding-top:2rem">
+    <div class="wrap">
+      <div class="head">
+        <h2 class="display">Le parcours</h2>
+        <span class="mono">Gestion · Corps · Métier</span>
+      </div>
+      <ol class="path">
+        <li>
+          <span class="path__step">01</span>
+          <div class="path__body">
+            <span class="mono">Les bases</span>
+            <h3>Gérer, chiffrer, communiquer</h3>
+            <p>Secondaire en informatique de gestion et en sciences économiques, puis une année de marketing à la HE Condorcet, à Mons.</p>
+          </div>
+        </li>
+        <li>
+          <span class="path__step">02</span>
+          <div class="path__body">
+            <span class="mono">Le corps</span>
+            <h3>Coaching sportif &amp; préparation physique</h3>
+            <p>Une année à la Haute École Léonard de Vinci, à Bruxelles (Alma).</p>
+            <ul class="chips" aria-label="Acquis">
+              <li>Myologie</li><li>Ostéologie</li><li>Arthrologie</li><li>Exercices</li><li>Relation client</li>
+            </ul>
+          </div>
+        </li>
+        <li class="is-now">
+          <span class="path__step">03</span>
+          <div class="path__body">
+            <span class="mono"><span class="live">En cours</span></span>
+            <h3>IFAPME Tournai, avec l'ADEPS</h3>
+            <p>Diplôme visé en fin d'année.</p>
+          </div>
+        </li>
+        <li class="is-next">
+          <span class="path__step">04</span>
+          <div class="path__body">
+            <span class="mono accent">Ensuite</span>
+            <h3>Lancement au <span data-field="venue">Centre de l'Hêtre</span></h3>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="bento bento-3">
+        <article class="tile t-half"><span class="idx">Entourage</span><div><h3>Pros de la santé</h3><p style="margin-top:.6rem">Un projet construit avec des praticiens du soin.</p></div></article>
+        <article class="tile t-half"><span class="idx">Méthode</span><div><h3>Fondée sur la science</h3><p style="margin-top:.6rem">Des programmes appuyés sur des études reconnues.</p></div></article>
+        <article class="tile t-addr">
+          <span class="mono">Adresse</span>
+          <address><span data-field="venue">Centre de l'Hêtre</span><br><span><span data-field="village">Erbisœul</span>, 7050 Jurbise</span></address>
+          <a class="btn" id="maps-link-2" href="#" target="_blank" rel="noopener">Itinéraire
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        </article>
+        <article class="tile t-quote">
+          <span class="q" aria-hidden="true">“</span>
+          <blockquote>Ce n'est pas parce que les choses sont difficiles que nous n'osons pas. C'est parce que nous n'osons pas qu'elles sont difficiles.</blockquote>
+          <span class="mono">Sénèque · Lettres à Lucilius, 104</span>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="mono">© <span id="year">2026</span> · <span data-field="name">Arthur</span></span>
+    <span class="mono">Préparation en cours</span>
+  </div>
+</footer>
+
+<script>
+/* ---------- Réglages ---------- */
+const CONFIG = {
+  name: "Arthur",
+  venue: "Centre de l'Hêtre",
+  village: "Erbisœul",
+  opening: "2027-09-01T09:00:00+02:00" // date visée pour le compte à rebours
+};
+
+(function () {
+  const $ = (s) => document.querySelector(s);
+  const $$ = (s) => [...document.querySelectorAll(s)];
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const openDate = new Date(CONFIG.opening);
+  CONFIG.openingYear = String(openDate.getFullYear());
+
+  $$("[data-field]").forEach(el => { const v = CONFIG[el.dataset.field]; if (v) el.textContent = v; });
+  $("#year").textContent = new Date().getFullYear();
+  $("#cd-label").textContent = new Intl.DateTimeFormat("fr-BE", { month: "long", year: "numeric" }).format(openDate);
+  const maps = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(CONFIG.venue + " " + CONFIG.village + " Jurbise");
+  $("#maps-link").href = maps; $("#maps-link-2").href = maps;
+
+  // Bandeau
+  const words = ["Préparation physique", "Individuel", "Groupe restreint", "Nutrition", "Santé", CONFIG.venue, CONFIG.village, "Ouverture " + CONFIG.openingYear];
+  const track = $("#ticker");
+  for (let k = 0; k < 2; k++) words.forEach(w => { const s = document.createElement("span"); s.textContent = w; track.appendChild(s); });
+
+  // Horloge
+  const clock = $("#clock");
+  const tick = () => {
+    try { clock.textContent = "Belgique · " + new Intl.DateTimeFormat("fr-BE", { hour: "2-digit", minute: "2-digit", timeZone: "Europe/Brussels" }).format(new Date()); }
+    catch (e) { clock.textContent = "Avant l'aube"; }
+  };
+  tick(); setInterval(tick, 15000);
+
+  // Compte à rebours
+  const pad = (n) => String(n).padStart(2, "0");
+  function countdown() {
+    let ms = Math.max(0, openDate - new Date());
+    const d = Math.floor(ms / 864e5); ms -= d * 864e5;
+    const h = Math.floor(ms / 36e5); ms -= h * 36e5;
+    const m = Math.floor(ms / 6e4); ms -= m * 6e4;
+    const s = Math.floor(ms / 1e3);
+    $("#cd-d").textContent = d; $("#cd-h").textContent = pad(h); $("#cd-m").textContent = pad(m); $("#cd-s").textContent = pad(s);
+  }
+  countdown(); setInterval(countdown, 1000);
+
+  // Soleil qui se lève au défilement
+  const root = document.documentElement;
+  function onScroll() {
+    const max = Math.max(1, Math.min(innerHeight * 1.2, root.scrollHeight - innerHeight));
+    root.style.setProperty("--sun", Math.min(1, scrollY / max).toFixed(3));
+  }
+  if (!reduce) { addEventListener("scroll", onScroll, { passive: true }); }
+  onScroll();
+
+  // Vues
+  const home = $("#view-home"), back = $("#view-backstage");
+  function route() {
+    const onBack = location.hash === "#coulisses";
+    home.hidden = onBack; back.hidden = !onBack;
+    if (onBack || location.hash === "#accueil") scrollTo(0, 0);
+    onScroll();
+  }
+  addEventListener("hashchange", route);
+  route();
+})();
+</script>
+
+</body>
+</html>
