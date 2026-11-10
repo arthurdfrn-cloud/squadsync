@@ -147,19 +147,62 @@ footer .wrap { display: flex; justify-content: space-between; gap: 1rem; flex-wr
 .t-quote .mono { color: rgba(11, 12, 11, 0.65); }
 .t-quote .q { font-family: var(--display); font-weight: 900; font-size: 4rem; line-height: 0.6; color: var(--bronze); }
 
+/* Parcours : frise */
+.path { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; counter-reset: none; }
+.path > li { position: relative; display: grid; gap: 1.2rem; align-content: start; padding: 1.5rem 1.3rem 1.7rem; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; min-width: 0; }
+.path > li::after { content: ""; position: absolute; top: 2.55rem; right: -11px; width: 12px; height: 1px; background: var(--bronze); }
+.path > li:last-child::after { display: none; }
+.path__step { font-family: var(--display); font-stretch: 62%; font-weight: 850; font-size: 3.4rem; line-height: 0.8; color: var(--bark); }
+.path__body { display: grid; gap: 0.55rem; }
+.path h3 { margin: 0; font-family: var(--display); font-stretch: 75%; font-weight: 800; text-transform: uppercase; font-size: clamp(1.35rem, 2.2vw, 1.75rem); line-height: 0.98; }
+.path p { margin: 0; color: var(--bark); }
+.path .is-now { border-color: rgba(192, 138, 72, 0.55); }
+.path .is-now .path__step { color: var(--bronze); }
+.path .is-next { background: var(--bronze); border-color: transparent; color: var(--bg); }
+.path .is-next .path__step, .path .is-next .mono { color: rgba(11, 12, 11, 0.7); }
+.chips { list-style: none; margin: 0.4rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.chips li { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.35rem 0.6rem; border: 1px solid var(--line); border-radius: 999px; color: var(--text); }
+.bento-3 .t-half { grid-column: span 3; min-height: 12rem; }
+
+/* Tablette */
+@media (max-width: 1024px) {
+  .path { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .path > li:nth-child(2)::after { display: none; }
+}
 @media (max-width: 860px) {
   .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .t-a, .t-place, .t-addr, .t-quote { grid-column: span 2 !important; grid-row: auto; min-height: 18rem; }
   .t-b, .t-c, .t-year { grid-column: span 1; }
-  .bento-3 .tile { grid-column: span 2; min-height: 0; }
+  .bento-3 .t-half { grid-column: span 1; min-height: 0; }
   .t-b, .t-c { min-height: 14rem; }
 }
-@media (max-width: 520px) {
+/* Téléphone */
+@media (max-width: 560px) {
   .count .wrap { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .cell:nth-child(3) { border-left: 0; padding-left: 0; }
   .cell:nth-child(n+3) { border-top: 1px solid var(--line); }
-  .t-b, .t-c, .t-year { grid-column: span 2; min-height: 12rem; }
+  .t-b, .t-c, .t-year, .bento-3 .t-half { grid-column: span 2; min-height: 11rem; }
+  .t-a { min-height: 20rem; }
+  .path { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .path > li { grid-template-columns: 3.2rem minmax(0, 1fr); gap: 0.9rem; border-radius: 0; border-width: 0 0 0 1px; border-color: var(--line); background: transparent; padding: 0 0 2rem 1.2rem; margin-left: 0.4rem; }
+  .path > li::after { top: 0.4rem; left: -4px; right: auto; width: 7px; height: 7px; border-radius: 50%; display: block !important; }
+  .path .is-now { border-color: var(--bronze); }
+  .path .is-next { background: transparent; color: var(--text); border-color: transparent; padding-bottom: 0; }
+  .path .is-next .path__step { color: var(--bronze); }
+  .path .is-next .mono { color: var(--bronze); }
+  .path__step { font-size: 2.6rem; }
+  section { padding-block: 3.5rem; }
+  .hero__line { margin-top: 1.2rem; }
 }
+/* Écrans tactiles : pas d'effet de survol collant, cibles confortables */
+@media (hover: none) {
+  .tile:hover { background: var(--surface); border-color: var(--line); }
+  .t-year:hover { background: var(--bronze); }
+  .t-quote:hover { background: var(--text); }
+  .next:hover svg { transform: none; }
+}
+a, .btn { -webkit-tap-highlight-color: transparent; }
+.btn { min-height: 44px; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
   html { scroll-behavior: auto; }
@@ -279,10 +322,54 @@ footer .wrap { display: flex; justify-content: space-between; gap: 1rem; flex-wr
 
   <section style="padding-top:2rem">
     <div class="wrap">
+      <div class="head">
+        <h2 class="display">Le parcours</h2>
+        <span class="mono">Gestion · Corps · Métier</span>
+      </div>
+      <ol class="path">
+        <li>
+          <span class="path__step">01</span>
+          <div class="path__body">
+            <span class="mono">Les bases</span>
+            <h3>Gérer, chiffrer, communiquer</h3>
+            <p>Secondaire en informatique de gestion et en sciences économiques, puis une année de marketing à la HE Condorcet, à Mons.</p>
+          </div>
+        </li>
+        <li>
+          <span class="path__step">02</span>
+          <div class="path__body">
+            <span class="mono">Le corps</span>
+            <h3>Coaching sportif &amp; préparation physique</h3>
+            <p>Une année à la Haute École Léonard de Vinci, à Bruxelles (Alma).</p>
+            <ul class="chips" aria-label="Acquis">
+              <li>Myologie</li><li>Ostéologie</li><li>Arthrologie</li><li>Exercices</li><li>Relation client</li>
+            </ul>
+          </div>
+        </li>
+        <li class="is-now">
+          <span class="path__step">03</span>
+          <div class="path__body">
+            <span class="mono"><span class="live">En cours</span></span>
+            <h3>IFAPME Tournai, avec l'ADEPS</h3>
+            <p>Diplôme visé en fin d'année.</p>
+          </div>
+        </li>
+        <li class="is-next">
+          <span class="path__step">04</span>
+          <div class="path__body">
+            <span class="mono accent">Ensuite</span>
+            <h3>Lancement au <span data-field="venue">Centre de l'Hêtre</span></h3>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
       <div class="bento bento-3">
-        <article class="tile"><span class="idx">01 · Formation</span><div><h3>IFAPME</h3><p style="margin-top:.6rem">Formation en cours. Méthode, entraînement, sécurité.</p></div></article>
-        <article class="tile"><span class="idx">02 · Entourage</span><div><h3>Pros de la santé</h3><p style="margin-top:.6rem">Un projet construit avec des praticiens du soin.</p></div></article>
-        <article class="tile"><span class="idx">03 · Méthode</span><div><h3>Fondée sur la science</h3><p style="margin-top:.6rem">Des programmes appuyés sur des études reconnues.</p></div></article>
+        <article class="tile t-half"><span class="idx">Entourage</span><div><h3>Pros de la santé</h3><p style="margin-top:.6rem">Un projet construit avec des praticiens du soin.</p></div></article>
+        <article class="tile t-half"><span class="idx">Méthode</span><div><h3>Fondée sur la science</h3><p style="margin-top:.6rem">Des programmes appuyés sur des études reconnues.</p></div></article>
         <article class="tile t-addr">
           <span class="mono">Adresse</span>
           <address><span data-field="venue">Centre de l'Hêtre</span><br><span><span data-field="village">Erbisœul</span>, 7050 Jurbise</span></address>
