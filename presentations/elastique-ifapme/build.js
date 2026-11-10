@@ -37,6 +37,9 @@ pres.subject = "Formation IFAPME – méthode d'entraînement en résistance él
 pres.author = "Formation IFAPME";
 const C = pres.SchemeColor;
 const W = 13.333;
+const LOGO = path.join(__dirname, "logo_ifapme.png"); // logo couleur (ratio 1200x538)
+const LOGO_BLANC = path.join(__dirname, "logo_ifapme_blanc.png"); // version blanche pour fonds sombres
+const LR = 538 / 1200;
 
 // ---------- Icônes ----------
 async function icon(Comp, color, size = 256) {
@@ -52,6 +55,7 @@ pres.defineSlideMaster({
   title: "TITRE_SOMBRE",
   background: { color: HEX.dk1 },
   objects: [
+    { image: { path: LOGO_BLANC, x: 0.8, y: 0.6, w: 2.4, h: 2.4 * LR, altText: "Logo IFAPME" } },
     { placeholder: { options: { name: "title", type: "title", x: 0.8, y: 2.2, w: 8.4, h: 1.9, fontSize: 48, bold: true, color: C.background1, valign: "bottom", align: "left", margin: 0 }, text: "" } },
     { placeholder: { options: { name: "body", type: "body", x: 0.8, y: 4.3, w: 8.4, h: 1.0, fontSize: 20, color: C.accent2, valign: "top", align: "left", margin: 0 }, text: "" } },
   ],
@@ -62,7 +66,8 @@ pres.defineSlideMaster({
   background: { color: HEX.lt1 },
   margin: [0.5, 0.6, 0.8, 0.6],
   objects: [
-    { placeholder: { options: { name: "title", type: "title", x: 0.6, y: 0.4, w: 11.6, h: 0.9, fontSize: 34, bold: true, color: C.text1, valign: "middle", margin: 0 }, text: "" } },
+    { image: { path: LOGO, x: 11.55, y: 0.5, w: 1.2, h: 1.2 * LR, altText: "Logo IFAPME" } },
+    { placeholder: { options: { name: "title", type: "title", x: 1.8, y: 0.4, w: 9.6, h: 0.9, fontSize: 34, bold: true, color: C.text1, valign: "middle", margin: 0 }, text: "" } },
     { placeholder: { options: { name: "source", type: "body", x: 0.6, y: 6.85, w: 10.8, h: 0.4, fontSize: 10, italic: true, color: C.text2, valign: "middle", margin: 0 }, text: "" } },
     { text: { text: "IFAPME · Résistance élastique", options: { x: 0.6, y: 7.18, w: 5, h: 0.25, fontSize: 9, color: HEX.accent5, margin: 0 } } },
   ],
@@ -73,7 +78,8 @@ pres.defineSlideMaster({
   title: "CONCLUSION",
   background: { color: HEX.dk1 },
   objects: [
-    { placeholder: { options: { name: "title", type: "title", x: 0.6, y: 0.4, w: 11.6, h: 0.9, fontSize: 34, bold: true, color: C.background1, valign: "middle", margin: 0 }, text: "" } },
+    { image: { path: LOGO_BLANC, x: 11.55, y: 0.5, w: 1.2, h: 1.2 * LR, altText: "Logo IFAPME" } },
+    { placeholder: { options: { name: "title", type: "title", x: 1.8, y: 0.4, w: 9.6, h: 0.9, fontSize: 34, bold: true, color: C.background1, valign: "middle", margin: 0 }, text: "" } },
   ],
   slideNumber: { x: 12.3, y: 6.9, w: 0.5, h: 0.35, fontSize: 10, color: HEX.accent5, align: "right" },
 });
