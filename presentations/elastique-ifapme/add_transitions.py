@@ -1,10 +1,36 @@
-"""Ajoute une transition en fondu (standard PowerPoint, compatible toutes versions) à chaque diapositive."""
+"""Ajoute une transition Morph (PowerPoint 2019 / Microsoft 365) à chaque diapositive,
+avec un repli automatique en fondu pour les versions qui ne gèrent pas Morph.
+Balisage identique à celui qu'écrit PowerPoint (mc:AlternateContent)."""
 import re
+import shutil
 import sys
 import zipfile
-import shutil
 
-TRANSITION = '<p:transition spd="slow"><p:fade/></p:transition>'
+P14 = "http://schemas.microsoft.com/office/powerpoint/2010/main"
+MC = "http://schemas.openxmlformats.org/markup-compatibility/2006"
+MORPH = (
+    f'<mc:AlternateContent xmlns:mc="{MC}">'
+    '<mc:Choice xmlns:p159="http://schemas.microsoft.com/office/powerpoint/2015/09/main" Requires="p159">'
+    '<p:transition spd="slow" p14:dur="1200"><p159:morph option="byObject"/></p:transition>'
+    "</mc:Choice>"
+    '<mc:Fallback><p:transition spd="slow"><p:fade/></p:transition></mc:Fallback>'
+    "</mc:AlternateContent>"
+)
+
+
+def patch(xml: str) -> str:
+    xml = re.sub(r"<mc:AlternateContent[^>]*>\s*<mc:Choice[^>]*p159.*?</mc:AlternateContent>", "", xml, flags=re.S)
+    xml = re.sub(r"<p:transition\b.*?</p:transition>|<p:transition\b[^>]*/>", "", xml, flags=re.S)
+    root = re.search(r"<p:sld\b[^>]*>", xml)
+    tag = root.group(0)
+    if "xmlns:p14=" not in tag:
+        xml = xml.replace(tag, tag[:-1] + f' xmlns:p14="{P14}">', 1)
+    # Ordre du schéma : cSld, clrMapOvr, transition, timing, extLst
+    for anchor in ("<p:timing", "<p:extLst", "</p:sld>"):
+        i = xml.find(anchor)
+        if i != -1:
+            return xml[:i] + MORPH + xml[i:]
+    raise ValueError("slide sans </p:sld>")
 
 
 def main(path):
@@ -13,15 +39,7 @@ def main(path):
         for item in zin.infolist():
             data = zin.read(item.filename)
             if re.fullmatch(r"ppt/slides/slide\d+\.xml", item.filename):
-                xml = data.decode("utf-8")
-                xml = re.sub(r"<p:transition\b.*?</p:transition>|<p:transition\b[^>]*/>", "", xml, flags=re.S)
-                # Ordre du schéma : cSld, clrMapOvr, transition, timing, extLst
-                for anchor in ("<p:timing", "<p:extLst", "</p:sld>"):
-                    i = xml.find(anchor)
-                    if i != -1:
-                        xml = xml[:i] + TRANSITION + xml[i:]
-                        break
-                data = xml.encode("utf-8")
+                data = patch(data.decode("utf-8")).encode("utf-8")
             zout.writestr(item, data)
     shutil.move(tmp, path)
 
