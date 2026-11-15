@@ -32,17 +32,38 @@ Il y a eu 3 passes de rendu, suivies d'une vérification par capture.
 | Mention « non contractuel » | ✓ incrustée en bas de chaque PNG |
 | Pas de cote, pas de label, pas de personne | ✓ |
 
+## Version 2 – répartition inversée (à votre demande)
+- **Rez · s'entraîner.** Tout le matériel lourd est au rez :
+  1. rack + banc sur dalles caoutchouc ;
+  2. rameur ;
+  3. kettlebells muraux ;
+  4. sac sur support ;
+  5. espalier + coin mobilité, avec miroirs sur le pignon.
+  L'éclairage est en rampes LED 4000 K. Le rack est représenté **sans barre de traction**, faute de hauteur connue sous les solives.
+- **Étage · accueillir.** On y trouve :
+  - un vestiaire contre le pignon, près de la trappe : casiers, banc, patères, miroir ;
+  - un espace détente : canapé, fauteuils, table basse, étagère, plantes ;
+  - le bureau du coach, avec le tableau de programmes sur la cloison ;
+  - une cuisine d'appoint sous la pente : évier, machine à café, étagère ;
+  - côté croupe, derrière le pilier, un bloc sanitaires avec toilettes et douche, séparé par une cloison avec 2 portes.
+
+  L'éclairage est chaud (2700–3000 K), avec spots sous les entraits et accents sur les chevrons.
+- Le second Velux se trouve dans les toilettes. Les deux Velux sont visibles en vues 1 et 6 (côté trappe en vue 2).
+- Contrôle de la passe 2 : bibliothèque et rameur trop présents au premier plan (vues 2 et 4), cadrages corrigés. Dans la coupe, la cloison face aux portes masquait le bloc, elle est donc masquée. La cloison entre toilettes et douche reste visible.
+- Hors périmètre, comme pour la version 1 : les visuels ne valident ni les arrivées d'eau ni l'évacuation des sanitaires et de la cuisine, ni la ventilation, ni la charge du plancher, ni l'accès. Ces points relèvent de professionnels qualifiés.
+
 ## Écarts connus par rapport aux photos
 - **Proportions estimées.** Longueur, largeur, pente (≈ 45°), hauteur des murets, position des entraits et taille de la trappe sont toutes « à l'œil ». Les images ne doivent pas servir à juger si un équipement passe sous un entrait.
 - **Charpente simplifiée.** Il y a 3 fermes régulières avec entrait, poinçon et faîtière, 2 pannes par versant et des chevrons régulièrement espacés. Les jambes de force, aisseliers et irrégularités visibles sur les photos ne sont pas reproduits. Les lattes et tuiles sont une texture.
 - **Croupe.** L'extrémité côté rangement est modélisée en croupe. C'est mon interprétation d'IMG_0415 à 0417.
 - **Velux.** Je les ai placés tous les deux sur le versant côté jardin, ce qui n'est pas confirmé.
 - **Pilier en blocs.** Sa section et sa position sont approximatives. Il s'arrête sous l'entrait.
-- **Rez fermé.** Les photos montrent un abri **ouvert** au sol en gravier. Le rendu suppose une fermeture vitrée entre les poteaux existants, un sol fini et des murs intérieurs. C'est une hypothèse de concept, pas un constat. Le gravier reste visible devant la façade.
+- **Rez fermé.** Les photos montrent un abri **ouvert** au sol en gravier. Le rendu suppose une fermeture vitrée entre les poteaux existants, un sol fini et des murs intérieurs (salle d'entraînement). C'est une hypothèse de concept, pas un constat. Le gravier reste visible devant la façade.
 - **Escalier extérieur.** Sa forme et son matériau (acier noir, marches bois) sont simplifiés. **Son arrivée à l'étage n'est pas visible** sur les photos : le rendu s'arrête à un palier, sans représenter de porte.
-- **Escalier de la trappe.** Il est conservé, raide et de type échelle de meunier, comme sur IMG_0411. Il arrive dans le salon.
+- **Escalier de la trappe.** Il est conservé, raide et de type échelle de meunier, comme sur IMG_0411. Il arrive au rez, près des miroirs.
 - **Maison en brique et arbres.** Ce sont des volumes de contexte simplifiés. Leurs positions ne sont pas relevées.
 - **Placards.** Ils sont repris le long des murets (photos), mais repeints en sauge pour la palette.
+- **Bloc sanitaires et cloisons.** Leur emplacement côté croupe est un choix de concept. La hauteur sous la croupe y diminue vite : à vérifier avec les mesures.
 - **Retirés.** Cible de fléchettes, toiles, matelas, livres, cartons, téléviseur, vélo, appareils existants, lampe hublot, animal, voiture et nid.
 
 ## Mesures nécessaires pour une version dimensionnée
@@ -70,8 +91,11 @@ Pour chaque mesure, notez si possible le point de référence (sol fini, dessus 
 15. Surface du rez (longueur × largeur) et entraxe des poteaux de façade.
 16. Nature des parois existantes (arrière, côtés) et du sol sous le gravier.
 
+**Sanitaires et cuisine**
+17. Emplacement des arrivées d'eau et évacuations existantes, s'il y en a. Hauteur libre côté croupe à 1 m et à 2 m du pilier.
+
 **Matériel**
-17. Les dimensions du rack, du rameur et du support de sac choisis, à confronter aux points 1, 3 et 4.
+18. Les dimensions du rack, du rameur et du support de sac choisis, à confronter au point 14 (hauteur sous solives au rez).
 
 ## Hors périmètre
 Ces visuels ne valident rien : accès, charge du plancher, sécurité incendie, urbanisme, assurance. Ces points relèvent de professionnels qualifiés.
