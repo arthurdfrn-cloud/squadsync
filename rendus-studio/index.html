@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Studio de coaching – rendus</title>
+<style>
+  :root { --bg:#F2EFE9; --ink:#1C1C1E; --muted:#5d5a55; --card:#fffdf9; --line:#1C1C1E1a; --brass:#B08D57; --sage:#8FA68E; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#161617; --ink:#F2EFE9; --muted:#b5b0a7; --card:#1f1f21; --line:#F2EFE91f; } }
+  :root[data-theme="dark"] { --bg:#161617; --ink:#F2EFE9; --muted:#b5b0a7; --card:#1f1f21; --line:#F2EFE91f; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font-family:system-ui, -apple-system, "Segoe UI", sans-serif; line-height:1.5; }
+  main { max-width:1200px; margin:0 auto; padding:32px 16px 64px; }
+  h1 { font-size:28px; margin:0 0 4px; letter-spacing:-.01em; }
+  .sub { color:var(--muted); margin:0 0 8px; }
+  .warn { display:inline-block; border-left:3px solid var(--brass); padding:6px 12px; background:var(--card); font-size:14px; margin:8px 0 28px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(min(100%, 520px), 1fr)); gap:20px; }
+  figure { margin:0; background:var(--card); border:1px solid var(--line); border-radius:8px; overflow:hidden; }
+  figure a { display:block; }
+  img { width:100%; height:auto; display:block; }
+  figcaption { padding:10px 14px 12px; font-size:15px; }
+  figcaption b { color:var(--brass); font-variant-numeric:tabular-nums; margin-right:6px; }
+  figcaption span { display:block; color:var(--muted); font-size:13px; }
+  footer { margin-top:32px; font-size:14px; color:var(--muted); }
+  footer a { color:inherit; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Studio de coaching – Jurbise</h1>
+  <p class="sub">Un étage qui entraîne, un rez qui accueille. Maquette 3D concept en 7 vues.</p>
+  <p class="warn">Visuel concept – non contractuel – dimensions à confirmer. Aucune mesure n'a été prise. Les proportions sont estimées à partir des photos.</p>
+  <div class="grid">
+    <figure><a href="01-etage-vue-ensemble.png"><img src="01-etage-vue-ensemble.png" alt="Étage vu depuis la trappe : charpente apparente, plateforme force, rameur, placards sauge"></a><figcaption><b>01</b>Étage · vue d'ensemble depuis la trappe<span>Charpente existante conservée, rampes LED 4000 K, accents chauds sur les chevrons.</span></figcaption></figure>
+    <figure><a href="02-etage-zone-force.png"><img src="02-etage-zone-force.png" alt="Rack et banc sur plateforme de dalles caoutchouc noires"></a><figcaption><b>02</b>Étage · zone force<span>Rack et banc sur dalles caoutchouc noires, placé entre deux fermes.</span></figcaption></figure>
+    <figure><a href="03-etage-zone-fonctionnel.png"><img src="03-etage-zone-fonctionnel.png" alt="Rangement mural de kettlebells, sac de frappe sur support, espalier et miroirs au fond"></a><figcaption><b>03</b>Étage · fonctionnel, frappe et mobilité<span>Kettlebells, sac de frappe autoportant, espalier et miroirs sur le pignon.</span></figcaption></figure>
+    <figure><a href="04-rez-accueil-salon.png"><img src="04-rez-accueil-salon.png" alt="Salon client avec canapé sauge, table basse, étagère et plantes"></a><figcaption><b>04</b>Rez · accueil et salon client<span>Canapé, table basse, étagère et plantes. Escalier existant de la trappe.</span></figcaption></figure>
+    <figure><a href="05-rez-bureau-boissons.png"><img src="05-rez-bureau-boissons.png" alt="Bureau du coach avec tableau de programmes et coin boissons"></a><figcaption><b>05</b>Rez · bureau et coin boissons<span>Tableau de programmes, plan de travail, évier et machine à café. Lumière 2700–3000 K.</span></figcaption></figure>
+    <figure><a href="06-facade-crepuscule.png"><img src="06-facade-crepuscule.png" alt="Façade au crépuscule, rez vitré et escalier extérieur éclairé"></a><figcaption><b>06</b>Façade au crépuscule · escalier éclairé<span>Poteaux existants, rez vitré (hypothèse), 2 Velux, clôture et pelouse.</span></figcaption></figure>
+    <figure><a href="07-coupe.png"><img src="07-coupe.png" alt="Coupe axonométrique avec zones nommées"></a><figcaption><b>07</b>Coupe axonométrique · étage et rez<span>Zones nommées, sans cote.</span></figcaption></figure>
+  </div>
+  <footer>Maquette interactive : <a href="studio3d.html">studio3d.html</a> (à ouvrir via un serveur local). Voir aussi <a href="inventaire.md">inventaire.md</a> et <a href="notes.md">notes.md</a>.</footer>
+</main>
+</body>
+</html>
