@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>S'entraîner à l'élastique</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&display=block" rel="stylesheet">
+<style>
+@page { size: 1280px 720px; margin: 0; }
+:root{
+  --bg:#0c0c0f; --s1:#17171c; --s2:#202027; --line:rgba(255,255,255,.08);
+  --t1:#f4f4f2; --t2:#b4b4bc; --t3:#7c7c86;
+  --lime:#c8ff2e; --red:#ef1c50; --ink:#0c0c0f;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg)}
+body{font-family:Inter,system-ui,sans-serif;color:var(--t1);-webkit-font-smoothing:antialiased;font-feature-settings:"tnum" 1}
+.slide{position:relative;width:1280px;height:720px;overflow:hidden;background:var(--bg);padding:56px 64px 0;page-break-after:always;break-after:page}
+.slide:last-child{page-break-after:auto}
+.logo{position:absolute;top:44px;right:64px;width:104px}
+.eyebrow{font-size:16px;font-weight:500;color:var(--lime);letter-spacing:.02em;display:flex;gap:12px;align-items:baseline}
+.eyebrow .n{font-variant-numeric:tabular-nums;color:var(--t3)}
+.display{font-family:Anton,Impact,sans-serif;font-weight:400;text-transform:uppercase;line-height:.98;letter-spacing:.005em}
+h2.display{font-size:68px;margin-top:12px}
+.compact h2.display{font-size:60px}
+.foot{position:absolute;left:64px;right:64px;bottom:28px;display:flex;justify-content:space-between;align-items:baseline;font-size:12px;color:var(--t3)}
+.foot b{font-weight:500;color:var(--t2);margin-right:8px}
+.lead{font-size:26px;line-height:1.35;color:var(--t1)}
+.muted{color:var(--t2)}
+.lime{color:var(--lime)} .red{color:var(--red)}
+
+/* 1 title */
+.title-slide{padding-top:64px}
+.title-slide .logo{position:static;width:168px}
+.title-slide .kicker{margin-top:72px}
+.title-slide .l1{font-size:92px;margin-top:20px}
+.title-slide .l2{font-size:188px;color:var(--lime);margin-top:4px}
+.title-slide .sub{margin-top:24px;font-size:22px;color:var(--t2);display:flex;gap:16px}
+.band{position:absolute;height:36px;border-radius:18px;transform-origin:left center}
+
+/* 2 question */
+.q{font-size:112px;margin-top:40px;line-height:.98}
+.q .w{color:var(--t1)}
+
+/* 3 principle */
+.bars{margin-top:56px;display:grid;grid-template-columns:220px 1fr;row-gap:44px;align-items:center}
+.bars .lab{font-size:18px;font-weight:500;color:var(--t2)}
+.bars .lab small{display:block;font-size:14px;color:var(--t3);font-weight:400;margin-top:4px}
+.bar{height:32px;border-radius:16px;background:#3a3a44;display:flex;align-items:center}
+.bar-row{display:flex;align-items:center;gap:20px}
+.bar-row .f{font-size:16px;color:var(--t2);white-space:nowrap}
+.bar-row .f b{color:var(--t1);font-weight:600}
+.principle-text{position:absolute;left:64px;right:64px;bottom:84px;display:flex;justify-content:space-between;align-items:flex-end;gap:48px}
+
+/* 4 material */
+.tools{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:40px}
+.tool{background:var(--s1);border:1px solid var(--line);border-radius:16px;padding:24px;height:236px;display:flex;flex-direction:column}
+.tool svg{height:72px;width:100%;margin-bottom:20px}
+.tool h3{font-family:Anton,Impact,sans-serif;font-weight:400;text-transform:uppercase;font-size:30px}
+.tool p{font-size:17px;color:var(--t2);margin-top:8px;line-height:1.35}
+.scale{margin-top:40px;display:flex;align-items:center;gap:20px}
+.scale .end{font-size:15px;color:var(--t3);white-space:nowrap}
+.chips{display:flex;gap:12px;flex:1}
+.chip{flex:1;text-align:center}
+.chip i{display:block;height:20px;border-radius:10px;margin-bottom:8px}
+.chip span{font-size:13px;color:var(--t2)}
+
+/* 5 science */
+.yes{background:var(--lime);color:var(--ink)}
+.yes .eyebrow{color:var(--ink)} .yes .eyebrow .n{color:rgba(12,12,15,.55)}
+.yes .foot{color:rgba(12,12,15,.65)} .yes .foot b{color:var(--ink)}
+.yes .big{position:absolute;left:52px;top:96px;font-size:360px;line-height:.9}
+.yes .right{position:absolute;left:640px;right:64px;top:112px}
+.yes .right h3{font-size:34px;font-weight:600;line-height:1.2;letter-spacing:-.01em}
+.finds{margin-top:28px;display:grid;gap:10px}
+.find{background:var(--ink);color:var(--t1);border-radius:12px;padding:14px 20px;display:flex;justify-content:space-between;align-items:baseline;font-size:18px;font-weight:500}
+.find span{color:var(--lime);font-size:15px;font-weight:400}
+.nuance{position:absolute;left:64px;width:520px;bottom:84px;font-size:18px;line-height:1.45}
+.nuance b{font-weight:600}
+
+/* 6 for whom */
+.who{margin-top:36px}
+.who-row{display:grid;grid-template-columns:560px 1fr;align-items:center;padding:24px 0;border-top:1px solid var(--line)}
+.who-row:last-child{border-bottom:1px solid var(--line)}
+.who-row .display{font-size:58px}
+.who-row p{font-size:24px;color:var(--t2)}
+
+/* 7 pros cons */
+.pc{display:grid;grid-template-columns:1fr 1.35fr;gap:48px;margin-top:40px}
+.pc h3{font-size:18px;font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.pc h3 i{width:12px;height:12px;border-radius:6px;display:inline-block}
+.pc ul{list-style:none}
+.pc li{padding:18px 0;border-top:1px solid var(--line);font-size:23px;font-weight:500}
+.pc li small{display:block;font-size:18px;color:var(--t2);font-weight:400;margin-top:4px}
+.pc li .arrow{color:var(--lime)}
+
+/* 8 dosage */
+.nums{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:48px}
+.nums .display{font-size:148px;color:var(--lime)}
+.nums .display.red{color:var(--red)}
+.nums p{font-size:17px;color:var(--t2);margin-top:8px}
+.rpe{margin-top:56px;display:grid;grid-template-columns:repeat(11,1fr);gap:8px}
+.rpe div{height:56px;border-radius:10px;background:var(--s1);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--t3)}
+.rpe .on{background:var(--red);border-color:var(--red);color:#fff;font-weight:600}
+.rpe-cap{margin-top:20px;font-size:22px;color:var(--t2)} .rpe-cap b{color:var(--t1);font-weight:600}
+
+/* 9 choose */
+.choose{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:44px}
+.card{background:var(--s1);border:1px solid var(--line);border-radius:16px;padding:28px}
+.card.ok{border-color:var(--lime)}
+.card .k{font-size:15px;color:var(--t3)}
+.card .display{font-size:56px;margin-top:8px}
+.card p{font-size:19px;color:var(--t2);margin-top:12px;line-height:1.4}
+.card p b{color:var(--t1);font-weight:600}
+.howto{margin-top:36px;font-size:22px;line-height:1.45;max-width:1050px}
+
+/* 10 levers */
+.stairs{position:absolute;left:64px;right:64px;bottom:76px;display:grid;grid-template-columns:repeat(5,1fr);gap:16px;align-items:end}
+.step h3{font-family:Anton,Impact,sans-serif;font-weight:400;text-transform:uppercase;font-size:32px}
+.step p{font-size:16px;color:var(--t2);margin:4px 0 12px}
+.step .blk{background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:12px 20px;font-family:Anton,Impact,sans-serif;font-size:44px;color:var(--lime)}
+.step.top .blk{background:var(--lime);color:var(--ink);border-color:var(--lime)}
+
+/* 11 session */
+.meta{margin-top:12px;font-size:19px;color:var(--t2)}
+.meta b{color:var(--t1);font-weight:600}
+table{width:100%;border-collapse:collapse;margin-top:16px}
+th{font-size:14px;font-weight:500;color:var(--t3);text-align:left;padding:0 12px 10px 0}
+td{padding:8px 12px 8px 0;border-top:1px solid var(--line);font-size:17px;vertical-align:baseline}
+td.n{color:var(--red);font-family:Anton,Impact,sans-serif;font-size:22px;width:44px}
+td.ex{font-family:Anton,Impact,sans-serif;text-transform:uppercase;font-size:22px;width:250px}
+td.ex small{display:block;font-family:Inter,sans-serif;text-transform:none;font-size:13px;color:var(--t3);margin-top:2px}
+td.mu{color:var(--t2);width:200px}
+td.do{color:var(--lime);font-weight:600;width:130px;white-space:nowrap}
+td.cue{color:var(--t1)}
+
+/* 12 your turn */
+.turn{background:var(--red)}
+.turn .eyebrow{color:#fff} .turn .eyebrow .n{color:rgba(255,255,255,.7)}
+.turn .foot{color:rgba(255,255,255,.75)} .turn .foot b{color:#fff}
+.turn .big{font-size:150px;margin-top:20px;color:#fff}
+.turn ol{list-style:none;margin-top:56px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.turn li{background:rgba(12,12,15,.92);border-radius:16px;padding:28px;min-height:200px;font-size:23px;line-height:1.4}
+.turn li b{display:block;font-family:Anton,Impact,sans-serif;font-weight:400;font-size:56px;color:var(--lime);margin-bottom:8px}
+
+/* 13 safety */
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:36px}
+.cols .display{font-size:44px;padding-bottom:12px;border-bottom:2px solid var(--line);margin-bottom:8px}
+.cols ul{list-style:none}
+.cols li{font-size:21px;line-height:1.4;padding:10px 0;color:var(--t1)}
+.alert{position:absolute;left:64px;right:64px;bottom:72px;background:var(--s1);border:1px solid var(--line);border-left:4px solid var(--red);border-radius:12px;padding:20px 24px;font-size:19px;line-height:1.45}
+.alert b{font-weight:600}
+
+/* 14 takeaways */
+.take{margin-top:28px;display:grid;gap:14px}
+.take div{display:grid;grid-template-columns:72px 1fr;align-items:baseline}
+.take .i{font-family:Anton,Impact,sans-serif;font-size:36px;color:var(--t3)}
+.take .display{font-size:64px}
+.thanks{position:absolute;right:64px;bottom:72px;text-align:right}
+.thanks .display{font-size:72px;color:var(--lime)}
+.thanks p{font-size:18px;color:var(--t2);margin-top:4px}
+
+/* 15 refs */
+.refs{margin-top:28px;columns:2;column-gap:48px;font-size:14px;line-height:1.5;color:var(--t2)}
+.refs p{break-inside:avoid;margin-bottom:10px;padding-left:16px;text-indent:-16px}
+.refs i{font-style:normal;color:var(--t1)}
+.minirefs{margin-top:12px;columns:3;column-gap:28px;font-size:12.5px;line-height:1.6;color:var(--t2);max-width:960px}
+.minirefs p{white-space:nowrap}
+</style>
+</head>
+<body>
+
+<!-- 1 -->
+<section class="slide title-slide">
+  <img class="logo" src="logo-white.png" alt="IFAPME">
+  <div class="eyebrow kicker">Formation IFAPME <span class="n">·</span> Renforcement musculaire</div>
+  <div class="display l1">S'entraîner à</div>
+  <div class="display l2">l'élastique</div>
+  <div class="sub"><span>Comprendre</span><span class="n" style="color:var(--t3)">·</span><span>Prouver</span><span style="color:var(--t3)">·</span><span>Programmer</span><span style="color:var(--t3)">·</span><span>Sécuriser</span></div>
+  <i class="band" style="background:var(--red);width:560px;left:880px;top:300px;transform:rotate(-24deg)"></i>
+  <i class="band" style="background:var(--lime);width:640px;left:820px;top:672px;transform:rotate(-24deg)"></i>
+</section>
+
+<!-- 2 -->
+<section class="slide">
+  <img class="logo" src="logo-white.png" alt="IFAPME">
+  <div class="eyebrow">La question du jour</div>
+  <div class="display q"><span class="lime">Un simple élastique</span><br><span class="w">peut-il remplacer<br>une machine de muscu ?</span></div>
+  <p class="lead muted" style="margin-top:40px">Votre avis d'abord. La réponse arrive dans trois diapositives</p>
+  <div class="foot"><span>Réponse et références : diapositive 5</span><span>2</span></div>
+</section>
+
+<!-- 3 -->
+<section class="slide">
+  <img class="logo" src="logo-white.png" alt="IFAPME">
+  <div class="eyebrow"><span class="n">01</span>Le principe</div>
+  <h2 class="display">Plus ça s'étire, plus ça résiste</h2>
+  <div class="bars">
+    <div class="lab">Au repos<small>longueur de départ</small></div>
+    <div class="bar-row"><div class="bar" style="width:240px"></div><span class="f">Tension nulle</span></div>
+    <div class="lab">Étiré × 1,5<small>+50 %</small></div>
+    <div class="bar-row"><div class="bar" style="width:360px"></div><span class="f">Tension modérée</span></div>
+    <div class="lab">Étiré × 2<small>+100 %</small></div>
+    <div class="bar-row"><div class="bar" style="width:480px;background:#6b6b78"></div><span class="f">Tension élevée</span></div>
+    <div class="lab" style="color:var(--t1)">Étiré × 2,5<small>limite de sécurité</small></div>
+    <div class="bar-row"><div class="bar" style="width:600px;background:var(--lime)"></div><span class="f"><b>Tension maximale</b></span></div>
+  </div>
+  <div class="principle-text">
+    <p class="lead">Faible au départ, <span class="lime">maximale en fin de mouvement</span></p>
+    <p style="font-size:17px;color:var(--t2);text-align:right;line-height:1.45">Loi de Hooke · F = k · Δx<br>La tension suit l'allongement, pas la vitesse</p>
+  </div>
+  <div class="foot"><span><b>Sources</b>Simoneau et al., JOSPT 2001 ; McMaster, Cronin &amp; McGuigan, Strength Cond J 2009</span><span>3</span></div>
+</section>
+
+<!-- 4 -->
+<section class="slide">
+  <img class="logo" src="logo-white.png" alt="IFAPME">
+  <div class="eyebrow"><span class="n">02</span>Le matériel</div>
+  <h2 class="display">4 outils, 4 publics</h2>
+  <div class="tools">
+    <div class="tool">
+      <svg viewBox="0 0 220 72" fill="none" stroke="#c8ff2e" stroke-width="3" stroke-linecap="round"><path d="M10 46c30-30 60 20 100-6s70-26 100-4"/><path d="M10 30c30-30 60 20 100-6s70-26 100-4" opacity=".45"/></svg>
+      <h3>Bande plate</h3><p>Rééducation et seniors : force, équilibre, autonomie</p>
+    </div>
+    <div class="tool">
+      <svg viewBox="0 0 220 72" fill="none" stroke="#c8ff2e" stroke-width="3" stroke-linecap="round"><rect x="8" y="26" width="34" height="20" rx="10"/><rect x="178" y="26" width="34" height="20" rx="10"/><path d="M42 36c40 22 96 22 136 0"/></svg>
+      <h3>Tube à poignées</h3><p>Renfo général, au bureau ou à la maison : peu de place, petit budget</p>
+    </div>
+    <div class="tool">
+      <svg viewBox="0 0 220 72" fill="none" stroke="#c8ff2e" stroke-width="7"><ellipse cx="110" cy="36" rx="46" ry="28"/></svg>
+      <h3>Mini-band</h3><p>Hanches et fessiers, placée au-dessus des genoux</p>
+    </div>
+    <div class="tool">
+      <svg viewBox="0 0 220 72" fill="none" stroke="#c8ff2e" stroke-width="7"><rect x="12" y="18" width="196" height="36" rx="18"/></svg>
+      <h3>Power band</h3><p>Sportifs : barre + bande, plus de force et de puissance</p>
+    </div>
+  </div>
+  <div class="scale">
+    <span class="end">Du plus léger</span>
+    <div class="chips">
+      <div class="chip"><i style="background:#d8c3a0"></i><span>Beige</span></div>
+      <div class="chip"><i style="background:#f2d24b"></i><span>Jaune</span></div>
+      <div class="chip"><i style="background:#d8392e"></i><span>Rouge</span></div>
+      <div class="chip"><i style="background:#2f9a4c"></i><span>Vert</span></div>
+      <div class="chip"><i style="background:#3f6fd0"></i><span>Bleu</span></div>
+      <div class="chip"><i style="background:#2a2a30;border:1px solid #55555e"></i><span>Noir</span></div>
+      <div class="chip"><i style="background:#c2c4c8"></i><span>Argent</span></div>
+      <div class="chip"><i style="background:#c9a133"></i><span>Or</span></div>
+    </div>
+    <span class="end">au plus fort</span>
+  </div>
+  <div class="foot"><span><b>Sources</b>Page &amp; Ellenbecker, 2003 ; Martins et al., 2013 ; Anderson et al., JSCR 2008 ; Andersen et al., 2010 ; Uchida et al., 2016 ; Thera-Band (l'ordre varie selon la marque)</span><span>4</span></div>
+</section>
+
+<!-- 5 -->
+<section class="slide yes">
+  <img class="logo" src="logo-black.png" alt="IFAPME">
+  <div class="eyebrow"><span class="n">03</span>Ce que dit la science</div>
+  <div class="display big">Oui.</div>
+  <div class="right">
+    <h3>Mêmes gains de force qu'avec des machines ou des haltères</h3>
+    <div class="finds">
+      <div class="find">Gains de force équivalents<span>Lopes 2019 · méta-analyse</span></div>
+      <div class="find">Activation musculaire comparable<span>Aboodarda 2016 · méta-analyse</span></div>
+      <div class="find">Mêmes résultats qu'aux machines<span>Colado 2008</span></div>
+      <div class="find">Efficace chez les seniors<span>Martins 2013 · méta-analyse</span></div>
+    </div>
+  </div>
+  <p class="nuance"><b>Nuance honnête :</b> ces études portent surtout sur des débutants, des seniors et la rééducation. Chez les sportifs très forts, on combine barre et élastique</p>
+  <div class="foot"><span><b>Sources</b>Lopes et al., SAGE Open Med 2019 ; Aboodarda et al., Clin Biomech 2016 ; Colado &amp; Triplett, JSCR 2008 ; Martins et al., Arch Gerontol Geriatr 2013</span><span>5</span></div>
+</section>
+
+<!-- 6 -->
+<section class="slide">
+  <img class="logo" src="logo-white.png" alt="IFAPME">
+  <div class="eyebrow"><span class="n">04</span>Le bilan</div>
+  <h2 class="display">Le pour, le contre et la parade</h2>
+  <div class="pc">
+    <div>
+      <h3><i style="background:var(--lime)"></i>Avantages</h3>
+      <ul>
+        <li>Léger, pas cher, se glisse dans un sac</li>
+        <li>Travaille dans toutes les directions</li>
+        <li>Doux pour les articulations à la reprise</li>
+        <li>Résiste encore au retour : on freine</li>
+      </ul>
+    </div>
+    <div>
+      <h3><i style="background:var(--red)"></i>Limites <span class="muted" style="font-weight:400">&nbsp;→ et ce qu'on fait</span></h3>
+      <ul>
+        <li>Pas de kilos affichés<small><span class="arrow">→</span> On dose au ressenti, échelle 0-10</small></li>
+        <li>Faible en début de mouvement<small><span class="arrow">→</span> Pré-tension : reculer de l'ancrage</small></li>
+        <li>Limité pour les très forts<small><span class="arrow">→</span> Bande doublée ou combinée à la barre</small></li>
+        <li>S'use, peut casser, contient du latex<small><span class="arrow">→</span> Inspection à chaque séance, version sans latex</small></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot"><span><b>Sources</b>Page &amp; Ellenbecker, 2003 ; McMaster et al., 2009 ; Lopes et al., 2019 ; Colado et al., JSCR 2012</span><span>6</span></div>
+</section>
+
+<!-- 7 -->
+<section class="slide">
+  <img class="logo" src="logo-white.png" alt="IFAPME">
+  <div class="eyebrow"><span class="n">05</span>Le dosage</div>
+  <h2 class="display">La recette</h2>
+  <div class="nums">
+    <div><div class="display">2-3</div><p>séances par semaine</p></div>
+    <div><div class="display">8-12</div><p>répétitions par série</p></div>
+    <div><div class="display">1-3</div><p>séries, 60 à 90 s de repos</p></div>
+    <div><div class="display red">7-8</div><p>sur 10 d'effort ressenti</p></div>
+  </div>
+  <div class="rpe"><div>0</div><div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div class="on">7</div><div class="on">8</div><div>9</div><div>10</div></div>
+  <p class="rpe-cap">Échelle OMNI-RES : <b>finir la série « difficile », jamais à l'échec</b></p>
+  <div class="foot"><span><b>Sources</b>ACSM Position Stand, MSSE 2009 ; OMS 2020 (Bull et al., BJSM) ; Colado et al., JSCR 2012 (échelle OMNI-RES)</span><span>7</span></div>
+</section>
+
+<!-- 8 -->
+<section class="slide turn">
+  <img class="logo" src="logo-white.png" alt="IFAPME">
+  <div class="eyebrow"><span class="n">06</span>Choisir sa couleur</div>
+  <div class="display big" style="font-size:84px;white-space:nowrap">À vous : trouvez votre couleur</div>
+  <p style="margin-top:20px;font-size:22px;line-height:1.4;color:#fff;max-width:1100px">Par binôme, assis, la bande autour des pieds : 12 rowings lents, 1 s pour tirer, 3 s pour revenir. Puis notez votre effort sur 10</p>
+  <ol>
+    <li><b>Moins de 8</b>répétitions propres : trop dure, <span class="lime">couleur en dessous</span></li>
+    <li><b>8 à 12</b>avec un effort de 7-8 sur 10 : <span class="lime">c'est la bonne</span></li>
+    <li><b>Plus de 15</b>répétitions faciles : trop légère, <span class="lime">couleur au-dessus</span></li>
+  </ol>
+  <div class="foot"><span>Pas de bande ? Mimez avec une serviette tendue &nbsp;·&nbsp; <b>Sources</b>Colado et al., JSCR 2012 ; ACSM, 2009</span><span>8</span></div>
+</section>
+
+<!-- 9 -->
+<section class="slide">
+  <img class="logo" src="logo-white.png" alt="IFAPME">
+  <div class="eyebrow"><span class="n">07</span>Progresser</div>
+  <h2 class="display">5 leviers, dans l'ordre</h2>
+  <p class="lead muted" style="margin-top:16px;font-size:22px">Série réussie deux séances de suite ? <span class="lime">On passe au levier suivant</span></p>
+  <div class="stairs">
+    <div class="step"><h3>Technique</h3><p>Amplitude complète, contrôlée</p><div class="blk" style="height:72px">1</div></div>
+    <div class="step"><h3>Volume</h3><p>+ répétitions, + séries</p><div class="blk" style="height:120px">2</div></div>
+    <div class="step"><h3>Pré-tension</h3><p>Reculer de l'ancrage</p><div class="blk" style="height:168px">3</div></div>
+    <div class="step"><h3>Résistance</h3><p>Couleur au-dessus</p><div class="blk" style="height:216px">4</div></div>
+    <div class="step top"><h3>Tempo</h3><p>Freiner le retour, 3 secondes</p><div class="blk" style="height:264px">5</div></div>
+  </div>
+  <div class="foot"><span><b>Sources</b>ACSM Position Stand, 2009 (surcharge progressive) ; Page &amp; Ellenbecker, 2003</span><span>9</span></div>
+</section>
+
+<!-- 10 -->
+<section class="slide compact">
+  <img class="logo" src="logo-white.png" alt="IFAPME">
+  <div class="eyebrow"><span class="n">08</span>La séance type</div>
+  <h2 class="display">6 exercices, tout le corps</h2>
+  <p class="meta"><b>5 min</b> d'échauffement · <b>6 exercices</b> · <b>5 min</b> de retour au calme · <b>35 min</b> environ</p>
+  <table>
+    <tr><th></th><th>Exercice</th><th>Muscles</th><th>Dosage</th><th>La consigne qui change tout</th></tr>
+    <tr><td class="n">01</td><td class="ex">Squat<small>bande sous les pieds</small></td><td class="mu">Jambes, fessiers</td><td class="do">3 × 10-12</td><td class="cue">Genoux dans l'axe des pieds</td></tr>
+    <tr><td class="n">02</td><td class="ex">Rowing<small>assis, bande autour des pieds</small></td><td class="mu">Dos, posture</td><td class="do">3 × 10-12</td><td class="cue">Serrer les omoplates, coudes près du corps</td></tr>
+    <tr><td class="n">03</td><td class="ex">Développé<small>bande passée dans le dos</small></td><td class="mu">Pectoraux, triceps</td><td class="do">3 × 10-12</td><td class="cue">Poignets droits, pousser devant soi</td></tr>
+    <tr><td class="n">04</td><td class="ex">Pont fessier<small>mini-band au-dessus des genoux</small></td><td class="mu">Fessiers</td><td class="do">3 × 12-15</td><td class="cue">Genoux vers l'extérieur, 1 s de pause en haut</td></tr>
+    <tr><td class="n">05</td><td class="ex">Rotation externe<small>bande légère, coude au corps</small></td><td class="mu">Épaules (coiffe)</td><td class="do">2 × 15</td><td class="cue">Coude collé au corps, mouvement lent</td></tr>
+    <tr><td class="n">06</td><td class="ex">Pallof press<small>bande ancrée sur le côté</small></td><td class="mu">Gainage</td><td class="do">2 × 10 / côté</td><td class="cue">Bras tendus 2 s, le buste ne tourne pas</td></tr>
+  </table>
+  <div class="foot"><span><b>Sources</b>Andersen et al., Phys Ther 2010 ; Page &amp; Ellenbecker, 2003 ; ACSM, 2009</span><span>10</span></div>
+</section>
+
+<!-- 11 -->
+<section class="slide">
+  <img class="logo" src="logo-white.png" alt="IFAPME">
+  <div class="eyebrow"><span class="n">09</span>Sécurité</div>
+  <h2 class="display">Avant, pendant, après</h2>
+  <div class="cols">
+    <div><div class="display red">Avant</div><ul><li>Inspecter la bande : une entaille, à la poubelle</li><li>Allergie au latex : bande sans latex</li></ul></div>
+    <div><div class="display">Pendant</div><ul><li>Ancrage solide, jamais à hauteur du visage</li><li>Maximum 2,5 × la longueur de repos</li><li>Ne jamais lâcher une bande tendue</li></ul></div>
+    <div><div class="display">Après</div><ul><li>Nettoyer à l'eau savonneuse, bien sécher</li><li>Ranger à l'abri du soleil et de la chaleur</li><li>Remplacer au premier signe d'usure</li></ul></div>
+  </div>
+  <div class="alert"><b>Avis médical d'abord</b> en cas de douleur pendant l'exercice, de problème cardiaque, d'opération ou de blessure récente. Le questionnaire Q-AAP+ aide à le savoir en 2 minutes</div>
+  <div class="foot"><span><b>Sources</b>Page &amp; Ellenbecker, 2003 ; Simoneau et al., 2001 ; Warburton et al., 2011 (Q-AAP+) ; recommandations Thera-Band</span><span>11</span></div>
+</section>
+
+<!-- 12 -->
+<section class="slide">
+  <img class="logo" src="logo-white.png" alt="IFAPME">
+  <div class="eyebrow">À retenir</div>
+  <div class="take" style="margin-top:20px;gap:6px">
+    <div><span class="i">01</span><span class="display" style="font-size:52px">Ça résiste quand ça s'étire</span></div>
+    <div><span class="i">02</span><span class="display lime" style="font-size:52px">Ça marche autant que la fonte</span></div>
+    <div><span class="i">03</span><span class="display" style="font-size:52px">On dose au ressenti : 7-8 sur 10</span></div>
+    <div><span class="i">04</span><span class="display red" style="font-size:52px">La sécurité d'abord</span></div>
+  </div>
+  <div class="eyebrow" style="margin-top:36px">Références</div>
+  <div class="minirefs">
+    <p>ACSM (2009) · Med Sci Sports Exerc 41(3)</p>
+    <p>Aboodarda et al. (2016) · Clin Biomech 39</p>
+    <p>Andersen et al. (2010) · Phys Ther 90(4)</p>
+    <p>Anderson et al. (2008) · J Strength Cond Res 22(2)</p>
+    <p>Bull et al., OMS (2020) · Br J Sports Med 54</p>
+    <p>Colado &amp; Triplett (2008) · J Strength Cond Res 22(5)</p>
+    <p>Colado et al. (2012) · J Strength Cond Res 26(11)</p>
+    <p>Lopes et al. (2019) · SAGE Open Med 7</p>
+    <p>Martins et al. (2013) · Arch Gerontol Geriatr 57(1)</p>
+    <p>McMaster et al. (2009) · Strength Cond J 31(1)</p>
+    <p>Page &amp; Ellenbecker (2003) · Human Kinetics</p>
+    <p>Simoneau et al. (2001) · J Orthop Sports Phys Ther 31(1)</p>
+    <p>Uchida et al. (2016) · J Phys Ther Sci 28(4)</p>
+    <p>Warburton et al. (2011) · Health Fit J Can 4(2), Q-AAP+</p>
+  </div>
+  <div class="thanks" style="bottom:56px"><div class="display">Merci</div><p>Vos questions</p></div>
+  <div class="foot"><span></span><span>12</span></div>
+</section>
+
+</body>
+</html>
