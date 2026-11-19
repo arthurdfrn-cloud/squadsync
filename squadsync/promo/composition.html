@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<title>SquadSync — montage étape par étape</title>
+<style>
+  :root {
+    --brut: #8e2a12;
+    --zoom: #f26b1d;
+    --subs: #f5c518;
+    --fx: #2f6bff;
+    --ink: #111;
+  }
+  html, body { margin: 0; background: #fff; }
+  #canvas {
+    position: relative; width: 540px; height: 960px; overflow: hidden;
+    background-color: #fbfbfa;
+    background-image: radial-gradient(circle, #d6d6d2 1.1px, transparent 1.3px);
+    background-size: 22px 22px;
+    font-family: Inter, 'Helvetica Neue', Arial, sans-serif;
+  }
+  #title {
+    position: absolute; top: 58px; left: 0; right: 0; text-align: center;
+    font-family: Caladea, Georgia, 'DejaVu Serif', serif; font-style: italic; font-weight: 700;
+    font-size: 66px; letter-spacing: -1.5px; color: var(--ink); line-height: 1;
+  }
+  #subtitle {
+    position: absolute; top: 132px; left: 0; right: 0; text-align: center;
+    font-size: 16px; font-weight: 500; color: #222;
+  }
+  /* Gros mot cinétique : placé SOUS le cadre pour l'effet "texte derrière le sujet" */
+  #kinetic {
+    position: absolute; left: 0; right: 0; top: 122px; text-align: center; z-index: 1;
+    font-family: 'Inter Display', Inter, Arial, sans-serif; font-weight: 900; font-size: 92px;
+    letter-spacing: -3px; color: var(--ink); opacity: 0; white-space: nowrap;
+    text-shadow: 0 0 28px rgba(47, 107, 255, .35);
+  }
+  #frame {
+    position: absolute; left: 30px; top: 206px; width: 480px; height: 520px; z-index: 2;
+    border-radius: 26px; overflow: hidden; background: #0b0d12;
+    box-shadow: 0 18px 40px rgba(0,0,0,.28), 0 4px 10px rgba(0,0,0,.18);
+  }
+  #shot { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
+  #shot img { position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: none; }
+  #ring {
+    position: absolute; border-radius: 10px; border: 4px solid var(--subs); display: none;
+    box-shadow: 0 0 24px rgba(245, 197, 24, .8), inset 0 0 14px rgba(245, 197, 24, .5);
+  }
+  #flash { position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; }
+  #vignette {
+    position: absolute; inset: 0; pointer-events: none; opacity: 0;
+    background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,.55) 100%);
+  }
+  #captions {
+    position: absolute; left: 22px; right: 22px; bottom: 34px; text-align: center;
+    font-weight: 800; font-size: 30px; line-height: 1.15; color: #fff;
+    text-shadow: 0 2px 0 #000, 0 0 12px rgba(0,0,0,.9);
+    -webkit-text-stroke: 1px rgba(0,0,0,.6);
+  }
+  #captions span { display: inline-block; margin: 0 4px; transform-origin: 50% 80%; }
+  #captions span.on { color: var(--subs); }
+  #tag {
+    position: absolute; top: 14px; right: 16px; font-size: 11px; font-weight: 800; letter-spacing: 1px;
+    color: rgba(255,255,255,.7);
+  }
+  /* Timeline */
+  #timeline { position: absolute; left: 30px; right: 30px; top: 790px; height: 120px; }
+  #bar { position: absolute; left: 0; right: 0; top: 22px; height: 34px; display: flex; }
+  #bar div { flex: 1; transition: none; }
+  #labels { position: absolute; left: 0; right: 0; top: 64px; display: flex; }
+  #labels div {
+    flex: 1; text-align: center; font-size: 12.5px; font-weight: 700; line-height: 1.2; color: #111;
+  }
+  #playhead { position: absolute; top: 0; width: 0; height: 60px; }
+  #playhead::before {
+    content: ''; position: absolute; left: -8px; top: 0;
+    border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 12px solid #111;
+  }
+  #playhead::after { content: ''; position: absolute; left: -1.5px; top: 10px; width: 3px; height: 50px; background: #111; }
+  #outro {
+    position: absolute; inset: 0; z-index: 5; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; opacity: 0; pointer-events: none;
+  }
+  #outro .big {
+    font-family: 'Inter Display', Inter, sans-serif; font-weight: 900; font-size: 64px; letter-spacing: -2px;
+    color: #fff; text-align: center; line-height: .95; text-shadow: 0 6px 30px rgba(0,0,0,.6);
+  }
+  #outro .small { margin-top: 14px; font-size: 18px; font-weight: 600; color: var(--subs); }
+</style>
+</head>
+<body>
+<div id="canvas">
+  <div id="title">SquadSync</div>
+  <div id="subtitle">Du brut au montage final</div>
+  <div id="kinetic"></div>
+  <div id="frame">
+    <div id="shot"></div>
+    <div id="ring"></div>
+    <div id="vignette"></div>
+    <div id="captions"></div>
+    <div id="tag">SQUADSYNC</div>
+    <div id="flash"></div>
+    <div id="outro"><div class="big">TROUVE LE<br />CRÉNEAU.</div><div class="small">Dispos d'équipe · en 1 lien</div></div>
+  </div>
+  <div id="timeline">
+    <div id="bar">
+      <div style="background:var(--brut)"></div>
+      <div style="background:var(--zoom)"></div>
+      <div style="background:var(--subs)"></div>
+      <div style="background:var(--fx)"></div>
+    </div>
+    <div id="labels">
+      <div>Brut</div>
+      <div>Zoom<br />+ Tracking</div>
+      <div>Sous-titres<br />+ Masquage</div>
+      <div>Anim + SFX<br />+ Musique</div>
+    </div>
+    <div id="playhead"></div>
+  </div>
+</div>
+
+<script src="assets/meta.js"></script>
+<script>
+// ---------------------------------------------------------------------------
+// Montage "étape par étape" : le même extrait de CLIP secondes est joué 4 fois,
+// chaque passe ajoute une couche de montage. renderFrame(t) est déterministe :
+// render.cjs l'appelle pour chaque image puis fait une capture.
+// ---------------------------------------------------------------------------
+const CLIP = 4.5
+const STAGES = 4
+const OUTRO = 2
+window.DURATION = CLIP * STAGES + OUTRO
+
+const FW = 480, FH = 520
+const M = window.META
+
+// Plans de l'extrait (temps locaux dans le clip)
+const SHOTS = [
+  { from: 0.0, to: 1.8, img: 'team', focus: M.team.focus, raw: 1.0, push: [1.05, 1.3],
+    caption: 'Tes joueurs cochent leurs dispos', word: 'DISPOS' },
+  { from: 1.8, to: 3.1, img: 'dash', focus: { x: M.dash.grid.x + M.dash.grid.w / 2 - .01, y: M.dash.grid.y + M.dash.grid.h / 2, w: .02, h: .02 },
+    raw: 1.0, push: [1.08, 1.22], caption: 'SquadSync croise toutes les grilles', word: 'MATCH' },
+  { from: 3.1, to: CLIP, img: 'dash', focus: M.dash.focus, raw: 1.6, push: [1.7, 2.3], ring: true,
+    caption: 'Mercredi 20h : tout le monde est dispo', word: 'MER 20H' },
+]
+window.CUTS = SHOTS.map((s) => s.from) // utilisé par render.cjs pour les SFX
+
+// Préchargement des images
+const shotEl = document.getElementById('shot')
+const imgs = {}
+function addImg(name, src) {
+  const im = new Image(); im.src = src; shotEl.appendChild(im); imgs[name] = im
+}
+for (let i = 0; i < M.team.frames; i++) addImg('team_' + i, `assets/team_${i}.png`)
+addImg('dash', 'assets/dash.png')
+window.ready = Promise.all(Object.values(imgs).map((im) => im.decode()))
+
+const $ = (id) => document.getElementById(id)
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v))
+const easeOut = (x) => 1 - Math.pow(1 - clamp(x, 0, 1), 3)
+const easeInOut = (x) => (x = clamp(x, 0, 1), x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2)
+// bruit pseudo-aléatoire déterministe pour le shake
+const noise = (n) => { const s = Math.sin(n * 127.1) * 43758.5453; return (s - Math.floor(s)) * 2 - 1 }
+
+function place(meta, focus, scale) {
+  const base = Math.max(FW / meta.w, FH / meta.h)
+  const dw = meta.w * base * scale, dh = meta.h * base * scale
+  const fx = focus.x + focus.w / 2, fy = focus.y + focus.h / 2
+  const left = clamp(FW / 2 - fx * dw, FW - dw, 0)
+  const top = clamp(FH / 2 - fy * dh, FH - dh, 0)
+  return { left, top, dw, dh }
+}
+
+window.renderFrame = function (t) {
+  const inOutro = t >= CLIP * STAGES
+  const stage = Math.min(Math.floor(t / CLIP), STAGES - 1)
+  const c = inOutro ? CLIP - 0.001 : t - stage * CLIP
+  const si = SHOTS.findIndex((s) => c >= s.from && c < s.to)
+  const shot = SHOTS[si]
+  const p = (c - shot.from) / (shot.to - shot.from) // progression dans le plan
+  const sinceCut = c - shot.from
+
+  // --- Fond qui dérive doucement ---
+  $('canvas').style.backgroundPosition = `${(t * 6) % 22}px ${(t * 10) % 22}px`
+
+  // --- Image du plan ---
+  let key = shot.img
+  let meta = M.dash
+  if (shot.img === 'team') {
+    meta = M.team
+    const n = M.team.frames - 1
+    key = 'team_' + clamp(Math.floor(easeInOut(p * 1.15) * n + 0.0001), 0, n)
+  }
+  for (const [k, im] of Object.entries(imgs)) im.style.display = k === key ? 'block' : 'none'
+
+  // Étape 1+ : punch-in progressif + "tracking" vers le point d'intérêt
+  const scale = stage >= 1 ? shot.push[0] + (shot.push[1] - shot.push[0]) * easeInOut(p) : shot.raw
+  const pl = place(meta, shot.focus, scale)
+
+  // Étape 4 : shake d'impact sur chaque coupe
+  let sx = 0, sy = 0, rot = 0
+  if (stage >= 3 && !inOutro) {
+    const k = Math.exp(-sinceCut * 9) * (sinceCut < .5 ? 1 : 0)
+    sx = noise(t * 60) * 9 * k; sy = noise(t * 60 + 3) * 9 * k; rot = noise(t * 60 + 7) * 1.2 * k
+  }
+  shotEl.style.width = pl.dw + 'px'
+  shotEl.style.height = pl.dh + 'px'
+  shotEl.style.transform = `translate(${pl.left + sx}px, ${pl.top + sy}px)`
+  $('frame').style.transform = `rotate(${rot}deg)`
+  // Étape 2+ : netteté / étalonnage
+  shotEl.style.filter = stage >= 1 ? 'contrast(1.14) saturate(1.3) brightness(1.04)' : 'none'
+  $('vignette').style.opacity = stage >= 1 ? 1 : 0
+
+  // Cadre lumineux sur le créneau star (étape 2+)
+  const ring = $('ring')
+  if (shot.ring && stage >= 1) {
+    const f = shot.focus, pad = 3
+    ring.style.display = 'block'
+    ring.style.left = pl.left + sx + f.x * pl.dw - pad + 'px'
+    ring.style.top = pl.top + sy + f.y * pl.dh - pad + 'px'
+    ring.style.width = f.w * pl.dw + pad * 2 - 8 + 'px'
+    ring.style.height = f.h * pl.dh + pad * 2 - 8 + 'px'
+    const pulse = stage >= 3 ? 0.55 + 0.45 * Math.abs(Math.sin(sinceCut * 7)) : 1
+    ring.style.opacity = easeOut(sinceCut / .25) * pulse
+  } else ring.style.display = 'none'
+
+  // --- Étape 3+ : sous-titres mot à mot ---
+  const cap = $('captions')
+  if (stage >= 2 && !inOutro) {
+    const words = shot.caption.split(' ')
+    const shown = clamp(Math.floor(p * words.length * 1.25) + 1, 1, words.length)
+    cap.innerHTML = words.slice(0, shown).map((w, i) => {
+      const age = (p * words.length * 1.25 - i) // en "mots"
+      const pop = stage >= 3 ? 1 + 0.35 * Math.max(0, 1 - age * 2.2) : 1
+      return `<span class="${i === shown - 1 ? 'on' : ''}" style="transform:scale(${pop.toFixed(3)})">${w}</span>`
+    }).join(' ')
+  } else cap.innerHTML = ''
+
+  // --- Étape 4 : mot géant cinétique derrière le cadre + flash de coupe ---
+  const kin = $('kinetic')
+  if (stage >= 3 && !inOutro) {
+    const a = easeOut(sinceCut / .28)
+    kin.textContent = shot.word
+    kin.style.opacity = a
+    kin.style.transform = `translateY(${(1 - a) * -30}px) scale(${1.5 - .5 * a})`
+    $('subtitle').style.opacity = 0
+    $('flash').style.opacity = Math.max(0, .75 - sinceCut * 6.5)
+  } else {
+    kin.style.opacity = 0
+    $('flash').style.opacity = 0
+    $('subtitle').style.opacity = 1
+  }
+
+  // --- Outro ---
+  const o = inOutro ? easeOut((t - CLIP * STAGES) / .35) : 0
+  $('outro').style.opacity = o
+  $('outro').style.transform = `scale(${1.25 - .25 * o})`
+  if (inOutro) {
+    shotEl.style.filter = `contrast(1.14) saturate(1.3) brightness(${1 - .55 * o}) blur(${3 * o}px)`
+    $('flash').style.opacity = Math.max(0, .8 - (t - CLIP * STAGES) * 6)
+  }
+
+  // --- Timeline : segment actif plein, les autres atténués ---
+  const bars = document.querySelectorAll('#bar div')
+  bars.forEach((b, i) => (b.style.opacity = inOutro || i <= stage ? 1 : .35))
+  const W = 480
+  $('playhead').style.left = clamp(t / (CLIP * STAGES), 0, 1) * W + 'px'
+}
+
+renderFrame(0)
+</script>
+</body>
+</html>
