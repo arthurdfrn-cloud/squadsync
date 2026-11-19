@@ -3,3 +3,5 @@ dist/
 .env
 shorts/work/
 shorts/out/
+shorts/library/sfx/
+shorts/library/music/

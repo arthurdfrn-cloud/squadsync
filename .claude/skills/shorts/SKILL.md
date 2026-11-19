@@ -49,12 +49,19 @@ Pour chaque clip, écrire aussi :
   le début du clip, requête GIPHY en anglais, littérale et universelle (« mind blown », « shocked face », « slow clap »,
   « this is fine »). Pas sur une phrase importante : le GIF ne doit pas couvrir l'information. Requiert `GIPHY_API_KEY`.
 - `title` et `description` : titre de publication (≤ 60 caractères, sans clickbait mensonger) + 3-5 hashtags pertinents.
+- `titles` : 2 à 4 mots-titres cinétiques → suivre le skill **typo-cinetique**.
+- `broll` : un plan de coupe toutes les 6-10 s là où une image sert le propos → suivre le skill **broll**
+  (générer les plans avec `tools/broll.py` AVANT le rendu).
+- `emojis` : 0 à 2 emojis animés sur une émotion nette (🔥 😳 😂 💀 🤯 ❤️), jamais en même temps qu'un GIF.
+- `look` et `music` : suivre **finition-qa** (étalonnage) et **sound-design** (musique, bruitages).
+- Si l'utilisateur a nommé un style (ou si `shorts/styles/` en contient un adapté) : suivre le skill **styles**.
 
-Écrire le tout dans `shorts/work/<job>/plan.json` (format en tête de `shorts/build.py`).
+Écrire le tout dans `shorts/work/<job>/plan.json` — format complet : `squadsync/shorts/PLAN_FORMAT.md`.
 
 ## 3. Musique
 
-Par défaut : **son TikTok tendance** ajouté par l'utilisateur à la publication.
+Voir le skill **sound-design** pour la bibliothèque musicale, les bruitages et le mixage.
+Par défaut, si la bibliothèque est vide : **son TikTok tendance** ajouté par l'utilisateur à la publication.
 - Chercher 2-3 sons adaptés au ton avec l'outil vidIQ `vidiq_tiktok_trending_sound_search` (coûte des crédits : le dire)
   et les proposer avec leur nom ; la vidéo est rendue **sans musique** (voix + bruitages), l'utilisateur ajoute le son dans l'app à ~10 % de volume.
 - Si l'utilisateur fournit un fichier (`shorts/work/<job>/music/…` ou `--music`), `build.py` le mixe bas sous la voix et cale
@@ -77,16 +84,15 @@ Ce que le moteur applique automatiquement (`shorts/remotion/Short.jsx`) :
 - zooms « jump cut » toutes les 2,5-4 s, punch-in sur les mots forts, secousse sur les booms, flash d'entrée ;
 - sous-titres 1-3 mots, gros, majuscules, contour noir, mot prononcé en jaune, mots forts en vert ;
 - accroche en carte blanche les 2,5 premières secondes, GIF en cartes qui popent, barre de progression en bas ;
-- bruitages générés (ding d'accroche, pop, boom, whoosh) — aucun droit d'auteur.
+- extrait étalonné (LUT du `look`) et netteté, grain pellicule, fuites de lumière sur les transitions ;
+- titres cinétiques (7 styles, dont « derrière le sujet » par détourage), B-roll avec 6 transitions, emojis animés Noto ;
+- bruitages de la bibliothèque (ou générés) placés sur chaque événement, musique qui baisse sous la voix,
+  mastering -14 LUFS.
 
 ## 5. Vérifier avant de livrer
 
-Pour chaque short, extraire 6 images et les regarder :
-```bash
-ffmpeg -loglevel error -y -i shorts/out/<job>/short_01.mp4 -vf "fps=1/3,scale=270:-1,tile=6x1" -frames:v 1 /tmp/sheet.png
-```
-Contrôler : visage bien dans le cadre, sous-titres lisibles et pas coupés, GIF qui ne masque pas le sujet, accroche lisible.
-Corriger `plan.json` (bornes, mots, GIF) ou forcer `"layout": "fit"` / `"crop"` dans le clip, puis relancer `--only`.
+Suivre le skill **finition-qa** : `python3 shorts/tools/qa.py shorts/out/<job>/`, puis regarder chaque planche.
+Corriger `plan.json` (bornes, mots, titres, B-roll) ou forcer `"layout": "fit"` / `"crop"`, puis relancer `--only`.
 
 ## 6. Livrer
 
