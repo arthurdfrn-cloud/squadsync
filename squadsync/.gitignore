@@ -5,3 +5,5 @@ shorts/work/
 shorts/out/
 shorts/library/sfx/
 shorts/library/music/
+__pycache__/
+*.pyc
