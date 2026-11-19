@@ -30,3 +30,18 @@ npm run promo:render                          # rend la vidéo (≈ 2 min)
   pour prévisualiser n'importe quel instant. Textes, timings des plans et sous-titres sont dans le tableau `SHOTS`.
 - `render.cjs` : capture chaque image à 30 fps, génère la bande-son (aucun fichier audio externe, donc pas de droits)
   et encode en H.264/AAC.
+
+## Outils installés pour les prochains montages
+
+| Outil | Rôle | Commande type |
+|---|---|---|
+| Remotion + `@remotion/gif` | moteur de montage en React, GIF sur la timeline (`promo/remotion/index.jsx`) | `npx remotion studio promo/remotion/index.jsx` |
+| yt-dlp | récupérer des vidéos de référence / memes (TikTok, YouTube) | `yt-dlp <url>` |
+| librosa | détecter le tempo pour caler les coupes sur le beat | `librosa.beat.beat_track(...)` |
+| rembg | détourer une personne/un objet (incrustations, texte derrière le sujet) | `rembg i in.png out.png` |
+| faster-whisper | sous-titres synchronisés au mot près depuis une voix off | `WhisperModel('small')` |
+| GIPHY | GIF par mot-clé (clé dans la variable d'env `GIPHY_API_KEY`) | `api.giphy.com/v1/gifs/search` |
+| Freesound / ElevenLabs | bruitages, voix off, musique (clés gérées par l'environnement cloud) | API |
+
+Dans un environnement cloud, si Remotion ne trouve pas Chrome, passe `--browser-executable` vers le Chromium de Playwright
+(ex. `/opt/pw-browsers/chromium_headless_shell-*/chrome-headless-shell-linux64/chrome-headless-shell`).
