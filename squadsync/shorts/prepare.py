@@ -31,7 +31,10 @@ def fetch(src, job):
     if os.path.exists(out):
         return out
     if re.match(r"^https?://", src):
-        run(["yt-dlp", "--no-warnings", "-f", "bv*[height<=1080][ext=mp4]+ba[ext=m4a]/bv*[height<=1080]+ba/b",
+        extra = ["--js-runtimes", "node"]
+        if os.environ.get("YTDLP_COOKIES"):  # YouTube exige parfois une session (« confirm you're not a bot »)
+            extra += ["--cookies", os.environ["YTDLP_COOKIES"]]
+        run(["yt-dlp", "--no-warnings", *extra, "-f", "bv*[height<=1080][ext=mp4]+ba[ext=m4a]/bv*[height<=1080]+ba/b",
              "--merge-output-format", "mp4", "-o", out, src])
     else:
         # ré-encode en mp4 H.264 si besoin, sinon copie simple

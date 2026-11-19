@@ -20,8 +20,10 @@ python3 shorts/prepare.py "<url ou fichier>" shorts/work/<job> [--lang fr] [--mo
 - `<job>` = nom court sans espaces (ex. `podcast-mars`).
 - Produit `transcript.txt` (horodaté), `transcript.json` (mot à mot), `faces.json`, `scenes.json`, `info.json`.
 - Vidéo de plus de 30 min : `--model base` pour aller plus vite ; `small` est le bon défaut, `medium` si l'audio est difficile.
-- Si le téléchargement échoue (YouTube sert ses vidéos depuis des serveurs `*.googlevideo.com` que le réseau peut bloquer),
-  le dire à l'utilisateur et proposer : un accès réseau élargi pour l'environnement, ou qu'il dépose le fichier vidéo.
+- YouTube refuse souvent les serveurs cloud (« Sign in to confirm you're not a bot »). Dans ce cas, le dire à l'utilisateur et
+  proposer : qu'il dépose le fichier vidéo dans la conversation (le plus simple), ou un fichier de cookies YouTube exporté
+  d'un compte secondaire, passé via `YTDLP_COOKIES=/chemin/cookies.txt` (jamais collé dans le chat, jamais commité).
+  TikTok fonctionne directement.
   Ne jamais inventer le contenu d'une vidéo non téléchargée.
 
 ## 2. Choisir les clips (le travail éditorial, le plus important)
