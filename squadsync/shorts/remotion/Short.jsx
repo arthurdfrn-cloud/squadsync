@@ -88,6 +88,28 @@ function MainVideo({ p, t, src, trimBefore, transparent }) {
   const g = useGeometry(p, t)
   const tb = trimBefore ?? Math.round(p.start * fps)
   const common = { src: staticFile(src || p.src), trimBefore: tb, transparent, muted: !!src }
+  if (p.layout === 'split' && p.cam) {
+    // Format stream : webcam en haut (zone camH), jeu en bas, cadrés indépendamment
+    const camH = Math.round(H * (p.camH ?? 0.42))
+    const c = p.cam
+    const cw = W / c.w                      // largeur à laquelle afficher la vidéo pour que la webcam remplisse la zone
+    const ch = cw / p.aspect
+    const camScale = Math.max(1, camH / (c.h * ch))
+    const gameH = H - camH
+    return (
+      <AbsoluteFill>
+        <div style={{ position: 'absolute', left: 0, top: 0, width: W, height: camH, overflow: 'hidden',
+          transform: `translate(${g.sh.x}px, ${g.sh.y}px) scale(${g.z})`, transformOrigin: '50% 60%' }}>
+          <OffthreadVideo {...common} style={{ position: 'absolute', width: cw * camScale, height: ch * camScale,
+            left: -c.x * cw * camScale - (cw * camScale * c.w - W) / 2, top: -c.y * ch * camScale - (ch * camScale * c.h - camH) / 2 }} />
+        </div>
+        <div style={{ position: 'absolute', left: 0, top: camH, width: W, height: gameH, overflow: 'hidden' }}>
+          <OffthreadVideo {...common} muted style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: `${(p.gameX ?? 0.5) * 100}% 50%` }} />
+        </div>
+        <div style={{ position: 'absolute', left: 0, top: camH - 3, width: W, height: 6, background: '#000' }} />
+      </AbsoluteFill>
+    )
+  }
   if (p.layout === 'fit') {
     const vh = W / p.aspect
     return (
@@ -256,7 +278,7 @@ function Hook({ text, t }) {
   )
 }
 
-function Captions({ chunks, t, hidden }) {
+function Captions({ chunks, t, hidden, captionY }) {
   const { fps } = useVideoConfig()
   const c = chunks.find((x) => t >= x.s && t < x.e)
   if (!c || hidden) return null
@@ -264,7 +286,7 @@ function Captions({ chunks, t, hidden }) {
   const pop = spring({ frame: f, fps, config: { damping: 12, stiffness: 260 } })
   return (
     <div style={{
-      position: 'absolute', left: 60, right: 60, top: H * 0.63, display: 'flex', flexWrap: 'wrap',
+      position: 'absolute', left: 60, right: 60, top: H * (captionY ?? 0.63), display: 'flex', flexWrap: 'wrap',
       justifyContent: 'center', gap: '0 30px', transform: `scale(${0.75 + 0.25 * pop})`,
     }}>
       {c.words.map((w, i) => {
@@ -381,7 +403,7 @@ export function Short(p) {
       {(p.gifs || []).map((g, i) => <GifPop key={'g' + i} g={g} t={t} />)}
       {(p.emojis || []).map((e, i) => <EmojiPop key={'e' + i} e={e} t={t} />)}
       <Hook text={p.hook} t={t} />
-      <Captions chunks={p.chunks} t={t} hidden={inBroll && p.hideCaptionsOnBroll} />
+      <Captions chunks={p.chunks} t={t} hidden={inBroll && p.hideCaptionsOnBroll} captionY={p.captionY} />
       <Grain frame={frame} amount={p.grain ?? 0.06} />
       {(p.leaks || []).map((at, i) => <LightLeak key={'l' + i} t={t} at={at} />)}
       <AbsoluteFill style={{ background: '#fff', opacity: flash }} />

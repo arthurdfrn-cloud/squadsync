@@ -159,6 +159,25 @@ def face_track(faces, scenes, start, end):
     return track, ratio, focus_y
 
 
+def cam_box(faces, start, end):
+    """Repère une webcam incrustée : petit visage stable dans un coin. Renvoie la zone normalisée {x,y,w,h} ou None."""
+    pts = [f for f in faces if start <= f["t"] <= end and f["x"] is not None]
+    allpts = [f for f in faces if start <= f["t"] <= end]
+    if len(pts) < max(4, 0.4 * len(allpts)):
+        return None
+    xs, ys, sz = (np.array([f[k] for f in pts]) for k in ("x", "y", "size"))
+    mx, my, ms = float(np.median(xs)), float(np.median(ys)), float(np.median(sz))
+    corner = (mx < 0.33 or mx > 0.67) or (my > 0.6)
+    stable = np.std(xs) < 0.05 and np.std(ys) < 0.05
+    if not (ms < 0.12 and corner and stable):
+        return None
+    w = min(0.5, max(0.16, ms * 3.2))
+    h = min(0.6, w * 16 / 9 * 0.75)  # webcam ~4:3 dans une image 16:9
+    x = min(max(0, mx - w / 2), 1 - w)
+    y = min(max(0, my - h * 0.45), 1 - h)
+    return {"x": round(x, 4), "y": round(y, 4), "w": round(w, 4), "h": round(h, 4)}
+
+
 def beats_of(path):
     import librosa
     y, sr = librosa.load(path, sr=22050, mono=True, duration=240)
@@ -297,7 +316,13 @@ def main():
             layout = "crop"
         else:
             layout = "fit"
+        # Stream (webcam dans un coin d'une image de jeu) → format « split » webcam en haut / jeu en bas
+        cam = cam_box(faces, start, end)
+        if layout != "full" and cam and "layout" not in clip:
+            layout = "split"
         layout = clip.get("layout", layout)
+        if layout == "split" and not cam:
+            layout = "fit"
 
         # Zooms : jump-cuts toutes les ~2,5-4 s (sur les coupures de phrase), punch sur les mots forts
         jumps, last, lvl = [], 0.0, 1.0
@@ -413,6 +438,7 @@ def main():
                  "layout": layout, "focusY": round(focus_y, 3), "track": track, "zooms": zooms, "jumps": jumps,
                  "booms": booms, "chunks": chunks, "gifs": gifs, "sfx": sfx, "hook": clip.get("hook", ""), "music": music,
                  "titles": titles, "broll": broll, "emojis": emojis, "leaks": leaks,
+                 "cam": cam, "camH": 0.42, "captionY": clip.get("caption_y", 0.36 if layout == "split" else 0.63),
                  "grain": clip.get("grain", plan.get("grain", 0.06)), "hideCaptionsOnBroll": clip.get("hide_captions_on_broll", False)}
         pfile = os.path.join(job, f"props_{cid}.json")
         json.dump(props, open(pfile, "w"), ensure_ascii=False)
