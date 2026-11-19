@@ -317,7 +317,8 @@ def main():
         else:
             layout = "fit"
         # Stream (webcam dans un coin d'une image de jeu) → format « split » webcam en haut / jeu en bas
-        cam = cam_box(faces, start, end)
+        fc = os.path.join(job, "facecam.json")
+        cam = json.load(open(fc)) if os.path.exists(fc) else cam_box(faces, start, end)
         if layout != "full" and cam and "layout" not in clip:
             layout = "split"
         layout = clip.get("layout", layout)

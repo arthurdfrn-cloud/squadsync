@@ -75,7 +75,7 @@ class Recorder:
         if "twitch.tv" in self.url:
             cmd = (f"streamlink --twitch-disable-ads --stdout '{self.url}' 720p60,720p,best 2>/dev/null | "
                    f"ffmpeg -loglevel error -i pipe:0 {' '.join(seg[:-1])} '{pattern}'")
-            self.proc = subprocess.Popen(cmd, shell=True)
+            self.proc = subprocess.Popen(cmd, shell=True, start_new_session=True)  # groupe : on arrête streamlink ET ffmpeg
         else:  # YouTube : flux vidéo + audio séparés, fusionnés par ffmpeg (via le proxy de l'environnement)
             r = subprocess.run(ytdlp_base() + ["-g", "-f", "bv*[height<=720][protocol^=m3u8]+ba[protocol^=m3u8]/b[height<=720]", self.url],
                                capture_output=True, text=True, timeout=90)
@@ -94,8 +94,11 @@ class Recorder:
         return self.proc is not None and self.proc.poll() is None
 
     def stop(self):
-        if self.alive():
-            self.proc.terminate()
+        if self.proc is not None and self.proc.poll() is None:
+            try:
+                os.killpg(os.getpgid(self.proc.pid), 15)
+            except (ProcessLookupError, PermissionError):
+                self.proc.terminate()
 
 
 # ------------------------------------------------------------------ chat

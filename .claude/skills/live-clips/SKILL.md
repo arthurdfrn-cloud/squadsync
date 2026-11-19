@@ -41,7 +41,9 @@ pubs, écrans de pause, contenu sensible (vie privée d'un tiers, propos visant 
 Dans chaque job retenu, écrire `plan.json` (skill **shorts** + `squadsync/shorts/PLAN_FORMAT.md`) :
 - bornes serrées autour du moment (souvent 15-35 s : le contexte minimum + la réaction + 2 s après) ;
 - `hook` qui pose la situation (« Squeezie découvre … 😭 ») — le spectateur doit comprendre en 2 s ;
-- layout automatique `split` si une webcam est détectée dans un coin (webcam en haut 42 %, jeu en bas, sous-titres à la jonction) ;
+- vérifier dans la transcription que c'est **le streamer** qui parle (pas les dialogues du jeu, souvent en anglais) :
+  sinon les sous-titres affichent le jeu → choisir un autre passage ou couper les sous-titres sur ce segment ;
+- layout automatique `split` si une webcam est détectée dans un coin (`facecam.json`, repérée par visage récurrent + bords fixes) (webcam en haut 42 %, jeu en bas, sous-titres à la jonction) ;
   forcer `"layout": "crop"` pour un « just chatting » plein cadre ;
 - titres `slam`/`stack` sur la réaction, emojis 😭💀😂, peu de B-roll (le live suffit), look `clean` ou `vivid-pop`.
 Puis `python3 shorts/build.py <job>` et le skill **finition-qa**.
